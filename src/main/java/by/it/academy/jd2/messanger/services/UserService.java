@@ -14,8 +14,8 @@ public class UserService implements IUserService {
 
     private IUserRepo userRepo;
 
-    private List<Character> illegalSymbols = new ArrayList<>
-            (Arrays.asList('<', '>', '!', '@', '`', '.', ',', ';', ':', '\'', '\"'));
+    private final List<Character> illegalSymbols = new ArrayList<>
+            (Arrays.asList('<', '>', '!', '`', ',', ';', ':', '\'', '\"'));
 
     public UserService(IUserRepo userRepo) {
         this.userRepo = userRepo;

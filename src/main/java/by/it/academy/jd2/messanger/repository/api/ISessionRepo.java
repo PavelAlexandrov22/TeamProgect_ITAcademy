@@ -1,6 +1,6 @@
 package by.it.academy.jd2.messanger.repository.api;
 
-import by.it.academy.jd2.messanger.User;
+import by.it.academy.jd2.messanger.domain.User;
 import jakarta.servlet.http.HttpSession;
 
 import java.util.List;

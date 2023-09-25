@@ -3,7 +3,6 @@ package by.it.academy.jd2.messanger.domain;
 import java.util.Objects;
 
 public class Message {
-    private Long id;
     private int fromId;
 
     private int toId;
@@ -13,19 +12,10 @@ public class Message {
     public Message() {
     }
 
-    public Message(Long id, int fromId, int toId, String messageBody) {
-        this.id=id;
+    public Message(int fromId, int toId, String messageBody) {
         this.fromId = fromId;
         this.toId = toId;
         this.messageBody = messageBody;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public int getFromId() {

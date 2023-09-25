@@ -2,8 +2,9 @@ package by.it.academy.jd2.messanger.repository.api;
 
 import by.it.academy.jd2.messanger.domain.User;
 
-public interface IUserRepo {
-    User getUser(int idUser);
+import java.util.Set;
 
-    void saveUser(User user);
+public interface IUserRepo {
+    User addIdforUser(User user);
+
 }

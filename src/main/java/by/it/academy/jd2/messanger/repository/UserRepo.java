@@ -16,4 +16,15 @@ public class UserRepo implements IUserRepo {
     public void saveUser(User user, Set<User> usersSet) {
         usersSet.add(user);
     }
+
+    @Override
+    public User getUserByName(String login, String passw, Set<User> users) {
+        return users.stream().filter(user -> user.getLogin().equals(login) && user.getPassword().equals(passw)).findFirst().get();
+    }
+
+    @Override
+    public Long getUserId(String login, String passw, Set<User> users) {
+        User user = getUserByName(login, passw,users);
+        return user == null ? null : user.getId();
+    }
 }

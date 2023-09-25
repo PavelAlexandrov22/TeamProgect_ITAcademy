@@ -7,19 +7,18 @@ import by.it.academy.jd2.messanger.repository.api.IMessageRepo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class MessageRepo implements IMessageRepo {
     @Override
     public List<Message> getMessages(Long idUser, List<User> users) {
-        return users.stream().filter(p -> p.getId().equals(idUser)).findFirst().orElse(
-                //todo create new list
-                new User()
-        ).getMessages();
+        Optional<User> userPresents=users.stream().filter(p -> p.getId().equals(idUser)).findFirst();
+        return userPresents.map(User::getMessages).orElse(new ArrayList<>());
     }
 
     @Override
     public void addMessage(Long toId, List<User> users, Message message) {
-        getMessages(toId, users).add(message);
+        getMessages(toId,users).add(message);
     }
 
     @Override

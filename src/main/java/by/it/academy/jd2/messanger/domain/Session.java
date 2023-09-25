@@ -1,19 +1,22 @@
 package by.it.academy.jd2.messanger.domain;
 
+import by.it.academy.jd2.messanger.repository.UserRepo;
+import by.it.academy.jd2.messanger.repository.api.IUserRepo;
 import jakarta.servlet.http.HttpSession;
 
-import java.util.List;
 import java.util.Set;
 
 public class Session {
     private Set<User> users;
 
-    private List<HttpSession> httpSession;
+    private Set<HttpSession> httpSession;
+
+    private IUserRepo userRepo=new UserRepo();
 
     public Session() {
     }
 
-    public Session(Set<User> users, List<HttpSession> httpSession) {
+    public Session(Set<User> users, Set<HttpSession> httpSession) {
         this.users = users;
         this.httpSession = httpSession;
     }
@@ -26,15 +29,17 @@ public class Session {
         this.users = users;
     }
 
-    public List<HttpSession> getHttpSession() {
+    public Set<HttpSession> getHttpSession() {
         return httpSession;
     }
 
-    public void setHttpSession(List<HttpSession> httpSession) {
+    public void setHttpSession(Set<HttpSession> httpSession) {
         this.httpSession = httpSession;
     }
 
     public void addSession(HttpSession httpSession){
         this.httpSession.add(httpSession);
     }
+
+
 }

@@ -13,8 +13,6 @@ public class User {
 
     private String role;
 
-    private List<Message> messages;
-
     public User() {
     }
 
@@ -25,16 +23,6 @@ public class User {
         this.fio = fio;
         this.brDate = brDate;
         this.role = role;
-    }
-
-    public User(Long id, String login, String password, String fio, Date brDate, String role, List<Message> messages) {
-        this.id=id;
-        this.login = login;
-        this.password = password;
-        this.fio = fio;
-        this.brDate = brDate;
-        this.role = role;
-        this.messages = messages;
     }
 
     public Long getId() {
@@ -85,14 +73,6 @@ public class User {
         this.role = role;
     }
 
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -102,7 +82,6 @@ public class User {
                 ", fio='" + fio + '\'' +
                 ", brDate=" + brDate +
                 ", role='" + role + '\'' +
-                ", messages=" + messages +
                 '}';
     }
 

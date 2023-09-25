@@ -4,14 +4,13 @@ import by.it.academy.jd2.messanger.repository.UserRepo;
 import by.it.academy.jd2.messanger.repository.api.IUserRepo;
 import jakarta.servlet.http.HttpSession;
 
+import java.util.List;
 import java.util.Set;
 
 public class Session {
     private Set<User> users;
-
+    private List<Message> messages;
     private Set<HttpSession> httpSession;
-
-    private IUserRepo userRepo=new UserRepo();
 
     public Session() {
     }
@@ -37,9 +36,15 @@ public class Session {
         this.httpSession = httpSession;
     }
 
-    public void addSession(HttpSession httpSession){
+    public void addSession(HttpSession httpSession) {
         this.httpSession.add(httpSession);
     }
 
+    public List<Message> getMessages() {
+        return messages;
+    }
 
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 }

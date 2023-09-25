@@ -7,24 +7,14 @@ import java.util.Set;
 
 public class UserRepo implements IUserRepo {
 
-    @Override
-    public User getUser(Long idUser, Set<User> usersSet) {
-       return usersSet.stream().filter(user -> user.getId().equals(idUser)).findFirst().get();
-    }
+    private Long id=0L;
 
     @Override
-    public void saveUser(User user, Set<User> usersSet) {
-        usersSet.add(user);
+    public User addIdforUser(User user) {
+        user.setId(id);
+        id++;
+        return user;
     }
 
-    @Override
-    public User getUserByName(String login, String passw, Set<User> users) {
-        return users.stream().filter(user -> user.getLogin().equals(login) && user.getPassword().equals(passw)).findFirst().get();
-    }
 
-    @Override
-    public Long getUserId(String login, String passw, Set<User> users) {
-        User user = getUserByName(login, passw,users);
-        return user == null ? null : user.getId();
-    }
 }

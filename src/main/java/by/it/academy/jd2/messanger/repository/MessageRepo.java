@@ -10,21 +10,39 @@ import java.util.List;
 import java.util.Optional;
 
 public class MessageRepo implements IMessageRepo {
+
+    private List<Message> messages=Collections.synchronizedList(new ArrayList<>());
+
+    /**
+     * @param idUser
+     * @return list
+     * method returning messages list of user
+     * if list is no present, method returning you empty list
+     */
     @Override
-    public List<Message> getMessages(Long idUser, List<User> users) {
-        Optional<User> userPresents=users.stream().filter(p -> p.getId().equals(idUser)).findFirst();
-        return userPresents.map(User::getMessages).orElse(new ArrayList<>());
+    public List<Message> getMessages(Long idUser) {
+        List<Message> messageListOfCurrentUser= Collections.synchronizedList(new ArrayList<>());
+        messages.stream().filter(p -> p.getToId()==idUser).forEach(messageListOfCurrentUser::add);
+        return messageListOfCurrentUser;
     }
 
+    /**
+     * @param message
+     * add message to recipient list by id
+     */
     @Override
-    public void addMessage(Long toId, List<User> users, Message message) {
-        getMessages(toId,users).add(message);
+    public void addMessage(Message message) {
+        messages.add(message);
     }
 
+    /**
+     * @param idUser
+     * @return
+     * give you count of messages
+     */
     @Override
-    public Long count(Long idUser, List<User> users) {
-        return (long) getMessages(idUser, users).size();
+    public Long count(Long idUser) {
+        return (long) getMessages(idUser).size();
     }
-
 
 }

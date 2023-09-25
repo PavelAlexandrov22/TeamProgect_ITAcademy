@@ -7,13 +7,11 @@ import java.util.List;
 
 public interface IMessageRepo {
 
-    List<Message> getMessages(Long idUser, List<User> users);
+    List<Message> getMessages(Long idUser);
 
-    void addMessage(Long toId,List<User> users,Message message);
+    void addMessage(Message message);
 
-    Long count(Long idUser,List<User> users);
-
-
+    Long count(Long idUser);
 
 
 }

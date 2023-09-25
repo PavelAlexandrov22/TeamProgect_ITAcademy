@@ -14,7 +14,7 @@ public class SessionRepoFactory {
         if (instance == null) {
             synchronized (SessionRepoFactory.class) {
                 if (instance==null){
-                    instance=new SessionRepo();
+                    instance=new SessionRepo(UserRepoFactory.getInstance());
                 }
             }
         }

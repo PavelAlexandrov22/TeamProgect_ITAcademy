@@ -24,10 +24,6 @@ public interface ISessionRepo {
 
     void saveUser(User user);
 
-    List<Message> getMessages(Long idUser);
 
-    void addMessage(Long toId,  Message message);
-
-    Long count(Long idUser);
 
 }

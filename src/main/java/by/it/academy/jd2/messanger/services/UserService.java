@@ -30,7 +30,7 @@ public class UserService implements IUserService {
 
 
     /**
-    заглушки пока не проверяд работу их, последние 2 буду доделывать
+    заглушки пока не проверял работу их, последние 2 буду доделывать
      **/
 
     private void passwordValidation(String login) throws ValidationException {

@@ -8,5 +8,5 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public interface ILoginService {
 
-    void login(User user, HttpServletRequest req, HttpServletResponse resp) throws ValidationException;
+    void login(User user) throws ValidationException;
 }

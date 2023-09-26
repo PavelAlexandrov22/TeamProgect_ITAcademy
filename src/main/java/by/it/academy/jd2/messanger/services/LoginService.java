@@ -1,7 +1,6 @@
 package by.it.academy.jd2.messanger.services;
 
 import by.it.academy.jd2.messanger.core.exeptions.ValidationException;
-import by.it.academy.jd2.messanger.domain.Session;
 import by.it.academy.jd2.messanger.domain.User;
 import by.it.academy.jd2.messanger.repository.api.ISessionRepo;
 import by.it.academy.jd2.messanger.services.api.ILoginService;
@@ -22,15 +21,15 @@ public class LoginService implements ILoginService {
     }
 
     @Override
-    public void login(User user, HttpServletRequest req, HttpServletResponse resp) throws ValidationException {
-        if(isUserContainsInDB(user.getLogin(), user.getPassword())){
+    public void login(User user) throws ValidationException {
+        if (isUserContainsInDB(user.getLogin(), user.getPassword())) {
             throw new ValidationException("Такого пользователя нет в системе");
-        } else {
-            HttpSession session = req.getSession();
         }
     }
 
-    private boolean isUserContainsInDB(String login, String password){
+    private boolean isUserContainsInDB(String login, String password) {
         return sessionRepo.getUserByName(login, password) != null;
     }
 }
+
+

@@ -2,44 +2,55 @@ package by.it.academy.jd2.messanger.services;
 
 import by.it.academy.jd2.messanger.domain.User;
 import by.it.academy.jd2.messanger.core.exeptions.ValidationException;
-import by.it.academy.jd2.messanger.repository.api.IUserRepo;
+import by.it.academy.jd2.messanger.repository.api.ISessionRepo;
 import by.it.academy.jd2.messanger.services.api.IUserService;
+import java.util.Date;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class UserService implements IUserService {
 
-    private IUserRepo userRepo;
+    private ISessionRepo sessionRepo;
 
-    private final List<Character> illegalSymbols = new ArrayList<>
-            (Arrays.asList('<', '>', '!', '`', ',', ';', ':', '\'', '\"'));
-
-    public UserService(IUserRepo userRepo) {
-        this.userRepo = userRepo;
+    public UserService(ISessionRepo sessionRepo) {
+        this.sessionRepo = sessionRepo;
     }
 
     @Override
     public void save(User user) throws ValidationException {
-        if (isIllegalData(user)) {
-             userRepo.saveUser(user);
-        } else {
-            throw new ValidationException("Некорректный ввод");
+        loginValidation(user.getLogin());
+        passwordValidation(user.getPassword());
+        fioValidation(user.getFio());
+        brDayValidation(user.getBrDate());
+        sessionRepo.saveUser(user);
+    }
+
+
+    private void passwordValidation(String login) throws ValidationException {
+        if (!login.matches("^[A-Za-z_-]{4,32}$")) {
+            throw new ValidationException("Неверный формат для логина");
         }
     }
 
-    public boolean isIllegalData(User user) {
-        if (user.getLogin() == null || user.getPassword() == null) {
-            return false;
+    private void loginValidation(String password) throws ValidationException {
+        if (!password.matches("^[a-zA-Z_-]{4,16}$")) {
+            throw new ValidationException("Неверный формат для пароля");
         }
-        boolean flag = true;
-        for (char c : illegalSymbols) {
-            if (user.getLogin().equals(c) || user.getPassword().equals(c) ||
-                    user.getFio().equals(c) || user.getRole().equals(c)) {
-                flag = false;
-            }
+    }
+
+    private void fioValidation(String fio) throws ValidationException {
+        if (!fio.matches("^[A-Za-z]+ [A-Za-z]+ [A-Za-z]+$")) {
+            throw new ValidationException("Неверное ФИО");
         }
-        return flag;
+    }
+
+    private void brDayValidation(Date brDay) throws ValidationException {
+        Date currentDate = new Date();
+
+        if (brDay == null) {
+            throw new ValidationException("Дата дня рождения не может быть null.");
+        }
+        if (brDay.after(currentDate)) {
+            throw new ValidationException("Дата дня рождения не может быть в будущем.");
+        }
     }
 }

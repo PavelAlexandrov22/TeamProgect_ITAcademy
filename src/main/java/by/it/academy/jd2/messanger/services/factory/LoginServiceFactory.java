@@ -16,7 +16,7 @@ public class LoginServiceFactory {
         if(instance == null){
             synchronized (LoginServiceFactory.class){
                 if(instance == null){
-                    instance = new LoginService(new SessionRepo(UserServiceFactory.getInstance()));
+                    instance = new LoginService(SessionRepoFactory.getInstance());
                 }
             }
         }

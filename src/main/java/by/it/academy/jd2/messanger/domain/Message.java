@@ -7,6 +7,7 @@ public class Message {
 
     private int toId;
 
+    private String toLogin;
     private String messageBody;
 
     public Message() {
@@ -40,6 +41,14 @@ public class Message {
 
     public void setMessageBody(String messageBody) {
         this.messageBody = messageBody;
+    }
+
+    public String getToLogin() {
+        return toLogin;
+    }
+
+    public void setToLogin(String toLogin) {
+        this.toLogin = toLogin;
     }
 
     @Override

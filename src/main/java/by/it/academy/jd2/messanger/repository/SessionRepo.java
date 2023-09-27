@@ -70,6 +70,14 @@ public class SessionRepo implements ISessionRepo {
         return this.users.stream().filter(user -> user.getLogin().equals(login) && user.getPassword().equals(passw)).findFirst().get();
     }
 
+    /**
+     *
+     * @param login
+     * @return user
+     * method for taken user entity by logn
+     * can return null
+     */
+
     @Override
     public User getUserByLogin(String  login){
         return this.users.stream().filter(user -> user.getLogin().equals(login)).findFirst().get();

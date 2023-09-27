@@ -30,6 +30,15 @@ public class LoginService implements ILoginService {
     private boolean isUserContainsInDB(String login, String password) {
         return sessionRepo.getUserByName(login, password) != null;
     }
+
+    public boolean isAdmin(User user){
+        if( user.getLogin().equals("admin") && user.getPassword().equals("admin")){
+            user.setRole("admin");
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 

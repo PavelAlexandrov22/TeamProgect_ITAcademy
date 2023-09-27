@@ -18,6 +18,8 @@ public interface ISessionRepo {
 
     User getUserByName(String login, String passw);
 
+    User getUserByLogin(String  login);
+
     Long getUserId(String login, String passw);
 
     User getUser(Long idUser);

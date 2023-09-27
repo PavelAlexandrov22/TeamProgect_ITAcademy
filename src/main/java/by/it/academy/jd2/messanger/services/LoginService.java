@@ -4,13 +4,7 @@ import by.it.academy.jd2.messanger.core.exeptions.ValidationException;
 import by.it.academy.jd2.messanger.domain.User;
 import by.it.academy.jd2.messanger.repository.api.ISessionRepo;
 import by.it.academy.jd2.messanger.services.api.ILoginService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.util.Optional;
 
 public class LoginService implements ILoginService {
 
@@ -25,17 +19,19 @@ public class LoginService implements ILoginService {
         if (isUserContainsInDB(user.getLogin(), user.getPassword())) {
             throw new ValidationException("Такого пользователя нет в системе");
         }
+        isAdmin(user);
     }
 
     private boolean isUserContainsInDB(String login, String password) {
         return sessionRepo.getUserByName(login, password) != null;
     }
 
-    public boolean isAdmin(User user){
+    private boolean isAdmin(User user){
         if( user.getLogin().equals("admin") && user.getPassword().equals("admin")){
             user.setRole("admin");
             return true;
         } else {
+            user.setRole("user");
             return false;
         }
     }

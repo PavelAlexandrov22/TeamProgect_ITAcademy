@@ -71,7 +71,4 @@ public class MessageService implements IMessageService {
             throw new ValidationException("неверно указан login пользователя");
         }
     }
-
-
-
 }

@@ -55,19 +55,12 @@ public class Message {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Message message = (Message) o;
-
-        if (fromId != message.fromId) return false;
-        if (toId != message.toId) return false;
-        return Objects.equals(messageBody, message.messageBody);
+        return fromId == message.fromId && toId == message.toId && Objects.equals(toLogin, message.toLogin) && Objects.equals(messageBody, message.messageBody);
     }
 
     @Override
     public int hashCode() {
-        int result = fromId;
-        result = 31 * result + toId;
-        result = 31 * result + (messageBody != null ? messageBody.hashCode() : 0);
-        return result;
+        return Objects.hash(fromId, toId, toLogin, messageBody);
     }
 }

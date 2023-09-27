@@ -10,6 +10,10 @@ public class LoginService implements ILoginService {
 
     private ISessionRepo sessionRepo;
 
+    private final String ADMIN = "admin";
+
+    private final String USER = "user";
+
     public LoginService(ISessionRepo userRepo) {
         this.sessionRepo = userRepo;
     }
@@ -27,11 +31,11 @@ public class LoginService implements ILoginService {
     }
 
     private boolean isAdmin(User user){
-        if( user.getLogin().equals("admin") && user.getPassword().equals("admin")){
-            user.setRole("admin");
+        if( user.getLogin().equals(ADMIN) && user.getPassword().equals(ADMIN)){
+            user.setRole(ADMIN);
             return true;
         } else {
-            user.setRole("user");
+            user.setRole(USER);
             return false;
         }
     }

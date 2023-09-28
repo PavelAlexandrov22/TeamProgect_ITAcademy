@@ -19,6 +19,7 @@ public class AdminSecurityFilter implements Filter {
         if((session != null) && (session.getAttribute("user") != null) ){
             User user = (User) session.getAttribute("user");
 
+
             chain.doFilter(request, response);
         }else {
             resp.sendRedirect(contextPath + "/");

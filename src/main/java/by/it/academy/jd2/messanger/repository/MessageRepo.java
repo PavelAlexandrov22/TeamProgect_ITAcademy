@@ -45,4 +45,9 @@ public class MessageRepo implements IMessageRepo {
         return (long) getMessages(idUser).size();
     }
 
+
+    public Long countAllMessages(){
+        return (long) messages.size();
+    }
+
 }

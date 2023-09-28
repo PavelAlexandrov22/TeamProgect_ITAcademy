@@ -116,4 +116,14 @@ public class SessionRepo implements ISessionRepo {
         }
     }
 
+    /**
+     *
+     * @param name
+     * @return user
+     * return user by name(warning: maybe nullable!!!)
+     */
+    public User getUserByName(String name){
+        return this.users.stream().filter(user -> user.getLogin().equals(name)).findFirst().get();
+    }
+
 }

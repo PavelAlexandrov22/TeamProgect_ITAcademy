@@ -1,5 +1,6 @@
 package by.it.academy.jd2.messanger.domain;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class Message {
@@ -7,8 +8,11 @@ public class Message {
 
     private int toId;
 
+    //fixme please delete this
     private String toLogin;
     private String messageBody;
+
+    private Date date;
 
     public Message() {
     }
@@ -17,6 +21,13 @@ public class Message {
         this.fromId = fromId;
         this.toId = toId;
         this.messageBody = messageBody;
+    }
+
+    public Message(int fromId, int toId, String messageBody, Date date) {
+        this.fromId = fromId;
+        this.toId = toId;
+        this.messageBody = messageBody;
+        this.date=date;
     }
 
     public int getFromId() {
@@ -49,6 +60,14 @@ public class Message {
 
     public void setToLogin(String toLogin) {
         this.toLogin = toLogin;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     @Override

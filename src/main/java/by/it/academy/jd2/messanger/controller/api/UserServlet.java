@@ -8,7 +8,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -20,8 +25,9 @@ public class UserServlet extends HttpServlet {
     private static final String LOGIN_PARAM_NAME = "login";
     private static final String PASSWORD_PARAM = "password";
     private static final String FIO = "fio";
+    private static final String ROLE = "User";
 
-    private static final Date DATE = new Date();
+    private static final String DATA = "data";
     private static final IUserService userService = UserServiceFactory.getInstance();
 
 
@@ -35,22 +41,30 @@ public class UserServlet extends HttpServlet {
         String login = req.getParameter(LOGIN_PARAM_NAME);
         String password = req.getParameter(PASSWORD_PARAM);
         String fio = req.getParameter(FIO);
-        String users = req.getParameter("Пользователь");
-        String date = req.getParameter(String.valueOf(DATE));
+        String role = req.getParameter(ROLE);
+        String date = req.getParameter(DATA);
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
 
-        //AtomicReference<User> user = new AtomicReference<>(new User());
+
 
         User user = new User();
         user.setLogin(login);
         user.setPassword(password);
         user.setFio(fio);
-        user.setRole(users);
-       // user.setBrDate(date);
-        user.setRole(users);
+        user.setRole(role);
+        try {
+            user.setBrDate(df.parse(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
         try {
           userService.save(user);
+            HttpSession session = req.getSession();
+            session.setAttribute("user", user);
+            req.getRequestDispatcher( "/user/message");
 
         } catch (ValidationException e) {
             resp.setStatus(400);

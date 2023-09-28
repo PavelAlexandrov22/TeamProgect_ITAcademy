@@ -54,7 +54,11 @@ public class MessageServlet extends HttpServlet {
         try {
             messageService.setMessage(message);
         } catch (ValidationException e) {
-            throw new RuntimeException(e);
+            resp.setStatus(400);
+            resp.getWriter().write(e.getMessage());
+        }catch (IllegalArgumentException e){
+            resp.setStatus(500);
+            resp.getWriter().write(e.getMessage());
         }
 
 

@@ -53,7 +53,11 @@ public class UserServlet extends HttpServlet {
           userService.save(user);
 
         } catch (ValidationException e) {
-            throw new RuntimeException(e);
+            resp.setStatus(400);
+            resp.getWriter().write(e.getMessage());
+        }catch (IllegalArgumentException e){
+            resp.setStatus(500);
+            resp.getWriter().write(e.getMessage());
         }
 
 

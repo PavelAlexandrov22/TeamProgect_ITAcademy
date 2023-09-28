@@ -11,6 +11,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.Date;
 
@@ -58,8 +60,15 @@ public class LoginServlet extends HttpServlet {
         try {
             iloginService.login(user);
             messageService.setMessage(message);
+
+            HttpSession session = req.getSession();
+            session.setAttribute("user", user);
         } catch (ValidationException e) {
-            throw new RuntimeException(e);
+            resp.setStatus(400);
+            resp.getWriter().write(e.getMessage());
+        }catch (IllegalArgumentException e){
+            resp.setStatus(500);
+            resp.getWriter().write(e.getMessage());
         }
 
 

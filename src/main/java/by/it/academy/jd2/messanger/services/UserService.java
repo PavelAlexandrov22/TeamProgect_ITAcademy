@@ -1,5 +1,4 @@
 package by.it.academy.jd2.messanger.services;
-
 import by.it.academy.jd2.messanger.domain.User;
 import by.it.academy.jd2.messanger.core.exeptions.ValidationException;
 import by.it.academy.jd2.messanger.repository.api.ISessionRepo;

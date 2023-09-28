@@ -24,6 +24,7 @@ public class LoginService implements ILoginService {
             throw new ValidationException("Такого пользователя нет в системе");
         }
         isAdmin(user);
+
     }
 
     private boolean isUserContainsInDB(String login, String password) {
@@ -40,5 +41,8 @@ public class LoginService implements ILoginService {
         }
     }
 }
+
+   
+
 
 

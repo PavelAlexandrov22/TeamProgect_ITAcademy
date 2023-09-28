@@ -14,7 +14,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 
 
 @WebServlet(name = "login", urlPatterns = "/login")
@@ -22,10 +25,10 @@ public class LoginServlet extends HttpServlet {
 
     private static final String LOGIN = "login";
     private static final String PASSWORD = "password";
-    private static final int FROM_ID = 0;
-    private static final int TO_ID = 0;
+    private static final String FROM_ID = "fromId";
+    private static final String TO_ID = "toId";
     private static final String MESSAGE_BODY = "messageBody";
-    private static final Date DATE = new Date();
+    private static final String DATA = "data";
     private static final ILoginService iloginService = LoginServiceFactory.getInstance();
     private static final IMessageService messageService = MessageServiceFactory.getInstance();
 
@@ -41,23 +44,25 @@ public class LoginServlet extends HttpServlet {
 
         String login = req.getParameter(LOGIN);
         String password = req.getParameter(PASSWORD);
-        String fromId = req.getParameter(String.valueOf(FROM_ID));
-        String toId = req.getParameter(String.valueOf(TO_ID));
+        String fromId = req.getParameter(FROM_ID);
+        String toId = req.getParameter(TO_ID);
         String messageBody = req.getParameter(MESSAGE_BODY);
-        String data = req.getParameter(String.valueOf(DATE));
+        String data = req.getParameter(DATA);
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
 
         User user = new User();
         user.setPassword(password);
         user.setLogin(login);
-        //user.setBrDate(data);
+        try {
+            user.setBrDate(df.parse(data));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         Message message = new Message();
         message.setFromId(Integer.parseInt(fromId));
         message.setToId(Integer.parseInt(toId));
         message.setMessageBody(messageBody);
-
-
-
 
         try {
             iloginService.login(user);

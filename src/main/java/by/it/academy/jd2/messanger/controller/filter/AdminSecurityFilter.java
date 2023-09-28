@@ -17,7 +17,6 @@ public class AdminSecurityFilter implements Filter {
         String contextPath = req.getContextPath();
         HttpSession session = req.getSession();
         if((session != null) && (session.getAttribute("user") != null) ){
-            User user = (User) session.getAttribute("user");
 
 
             chain.doFilter(request, response);

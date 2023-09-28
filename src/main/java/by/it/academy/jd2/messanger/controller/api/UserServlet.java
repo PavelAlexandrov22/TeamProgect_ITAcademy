@@ -1,5 +1,4 @@
 package by.it.academy.jd2.messanger.controller.api;
-
 import by.it.academy.jd2.messanger.core.exeptions.ValidationException;
 import by.it.academy.jd2.messanger.domain.User;
 import by.it.academy.jd2.messanger.services.api.IUserService;
@@ -9,10 +8,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicReference;
+
 
 @WebServlet(name = "userServlet", urlPatterns = "api/user")
 public class UserServlet extends HttpServlet {
@@ -38,18 +36,22 @@ public class UserServlet extends HttpServlet {
         String password = req.getParameter(PASSWORD_PARAM);
         String fio = req.getParameter(FIO);
         String users = req.getParameter("Пользователь");
+        String date = req.getParameter(String.valueOf(DATE));
 
 
         //AtomicReference<User> user = new AtomicReference<>(new User());
+
         User user = new User();
         user.setLogin(login);
         user.setPassword(password);
         user.setFio(fio);
         user.setRole(users);
-        user.setBrDate(DATE);
+       // user.setBrDate(date);
+        user.setRole(users);
 
         try {
-            userService.save(user);
+          userService.save(user);
+
         } catch (ValidationException e) {
             throw new RuntimeException(e);
         }

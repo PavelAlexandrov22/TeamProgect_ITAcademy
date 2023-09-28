@@ -1,10 +1,6 @@
 package by.it.academy.jd2.messanger.repository.api;
-import by.it.academy.jd2.messanger.domain.Message;
-
 import by.it.academy.jd2.messanger.domain.User;
 import jakarta.servlet.http.HttpSession;
-
-import java.util.List;
 import java.util.Set;
 
 public interface ISessionRepo {
@@ -17,6 +13,8 @@ public interface ISessionRepo {
     Long getCountUser();
 
     User getUserByName(String login, String passw);
+
+    User getUserByLogin(String  login);
 
     Long getUserId(String login, String passw);
 

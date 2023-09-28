@@ -26,7 +26,10 @@ public class UserService implements IUserService {
 
     private void passwordValidation(String login) throws ValidationException {
         if (!login.matches("^[A-Za-z_-]{4,32}$")) {
+
             throw new ValidationException("Неверный формат для логина");
+
+        
         }
     }
 

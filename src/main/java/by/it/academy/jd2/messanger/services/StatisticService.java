@@ -18,6 +18,8 @@ public class StatisticService implements IStatisticService {
 
     @Override
     public void updateStatistic(HttpSession session) {
-        //todo  мне нужно положишь статистику в бд? Сергей? типо принять сессию и положить в сет статистик
+
+      //todo  мне нужно положишь статистику в бд? Сергей? типо принять сессию и положить в сет статистик
     }
 }
+

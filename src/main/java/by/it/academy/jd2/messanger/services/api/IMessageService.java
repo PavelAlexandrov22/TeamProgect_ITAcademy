@@ -10,4 +10,7 @@ public interface IMessageService {
     void setMessage(Message message) throws ValidationException;
 
     List<Message> getMessage(User user);
+
+
 }
+

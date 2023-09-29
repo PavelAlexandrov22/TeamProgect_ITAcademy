@@ -20,7 +20,7 @@ public class StatisticServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        long countActiveUser = UserListener.getActiveUsers();
+        //long countActiveUser = UserListener.getActiveUsers();
 
         if (Optional.ofNullable(req.getParameter("user")).isPresent()) {
             String login = req.getParameter("user");

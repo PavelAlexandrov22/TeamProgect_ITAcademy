@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-@WebServlet(name = "userServlet", urlPatterns = "api/user")
+@WebServlet(name = "userServlet", urlPatterns = "/api/user")
 public class UserServlet extends HttpServlet {
 
     private static final String LOGIN_PARAM_NAME = "login";

@@ -1,6 +1,7 @@
 package by.it.academy.jd2.messanger.controller.api;
 import by.it.academy.jd2.messanger.core.exeptions.ValidationException;
 import by.it.academy.jd2.messanger.domain.Message;
+import by.it.academy.jd2.messanger.domain.User;
 import by.it.academy.jd2.messanger.services.api.IMessageService;
 import by.it.academy.jd2.messanger.services.factory.MessageServiceFactory;
 import jakarta.servlet.ServletException;
@@ -20,6 +21,7 @@ public class MessageServlet extends HttpServlet {
     private static final String MESSAGE_BODY = "messageBody";
 
     private static final String TO_ID = "toId";
+    private  HttpSession session;
 
 
 
@@ -27,12 +29,15 @@ public class MessageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+         session = req.getSession();
+
+        User user = (User) session.getAttribute("user");
+        req.setAttribute("message", messageService.getMessage(user));
+        req.setAttribute("user", user);
+        req.getRequestDispatcher("/ui/chats.jsp").forward(req, resp);
 
 
-        PrintWriter writer = resp.getWriter();
 
-
-       // writer.write(messageService.getMessage());
 
 
     }
@@ -52,7 +57,6 @@ public class MessageServlet extends HttpServlet {
 
         try {
             messageService.setMessage(message);
-            HttpSession session = req.getSession();
             session.setAttribute("message", message);
         } catch (ValidationException e) {
             resp.setStatus(400);

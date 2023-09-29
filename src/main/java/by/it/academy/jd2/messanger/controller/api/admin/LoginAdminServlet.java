@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 @WebServlet(name = "loginAdmin", urlPatterns = "/admin/login")
 public class LoginAdminServlet extends HttpServlet {
@@ -27,7 +27,11 @@ public class LoginAdminServlet extends HttpServlet {
     private static final String DATA = "data";
     private static final IUserService userService = UserServiceFactory.getInstance();
 
-
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        req.getRequestDispatcher("/ui/signup.jsp").forward(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)

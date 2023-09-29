@@ -1,13 +1,10 @@
 package by.it.academy.jd2.messanger.repository;
-
-import by.it.academy.jd2.messanger.domain.User;
 import by.it.academy.jd2.messanger.domain.Message;
 import by.it.academy.jd2.messanger.repository.api.IMessageRepo;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
+
 
 public class MessageRepo implements IMessageRepo {
 
@@ -50,4 +47,4 @@ public class MessageRepo implements IMessageRepo {
         return (long) messages.size();
     }
 
-}
+

@@ -1,8 +1,12 @@
 package by.it.academy.jd2.messanger.services;
 
+import by.it.academy.jd2.messanger.domain.Message;
+import by.it.academy.jd2.messanger.domain.User;
 import by.it.academy.jd2.messanger.repository.api.ISessionRepo;
 import by.it.academy.jd2.messanger.services.api.IStatisticService;
 import jakarta.servlet.http.HttpSession;
+
+import java.util.Map;
 
 public class StatisticService implements IStatisticService {
     private ISessionRepo sessionRepo;
@@ -21,5 +25,8 @@ public class StatisticService implements IStatisticService {
 
       //todo  мне нужно положишь статистику в бд? Сергей? типо принять сессию и положить в сет статистик
     }
+
+
+
 }
 

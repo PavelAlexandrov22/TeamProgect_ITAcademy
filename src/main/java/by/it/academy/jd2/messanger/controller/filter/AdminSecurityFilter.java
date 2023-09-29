@@ -1,6 +1,6 @@
 package by.it.academy.jd2.messanger.controller.filter;
 
-import by.it.academy.jd2.messanger.domain.User;
+
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

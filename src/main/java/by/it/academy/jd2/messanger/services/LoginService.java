@@ -28,7 +28,7 @@ public class LoginService implements ILoginService {
     }
 
     private boolean isUserContainsInDB(String login, String password) {
-        return sessionRepo.getUserByName(login, password) != null;
+        return sessionRepo.getUserByNameAndPassword(login, password) != null;
     }
 
     private boolean isAdmin(User user){
@@ -40,6 +40,8 @@ public class LoginService implements ILoginService {
             return false;
         }
     }
+
+
 }
 
    

@@ -104,15 +104,14 @@
 
 <div class="container">
     <div class="login">
-        <form action="${pageScope.request.contextPath}/user/message" method="post">
         <div class="row">
-            <h2>messages</h2>
+            <h2>statistic</h2>
             <div class="col-md-12">
-                <label for="email">To</label>
-                <input type="text" class="form-control" id="email" placeholder="recipient@mail.com">
+                <label for="sessions">Sessions total</label>
+                <input type="text" class="form-control" id="sessions" placeholder="recipient@mail.com">
                 <br>
-                <label for="message">Message</label>
-                <input type="text" class="form-control" id="message" placeholder="message text">
+                <label for="messages">Messages total</label>
+                <input type="text" class="form-control" id="messages" placeholder="message text">
             </div>
         </div>
         <div class="row">
@@ -120,7 +119,6 @@
                 <input type="submit" id="send" value="Send" class="btn btn-outline-success btn-form">
             </div>
         </div>
-        </form>
     </div>
 </div>
 

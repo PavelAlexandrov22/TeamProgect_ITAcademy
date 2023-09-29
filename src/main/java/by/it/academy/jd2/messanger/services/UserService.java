@@ -1,8 +1,11 @@
 package by.it.academy.jd2.messanger.services;
+
 import by.it.academy.jd2.messanger.domain.User;
 import by.it.academy.jd2.messanger.core.exeptions.ValidationException;
 import by.it.academy.jd2.messanger.repository.api.ISessionRepo;
 import by.it.academy.jd2.messanger.services.api.IUserService;
+import jakarta.servlet.http.HttpSession;
+
 import java.util.Date;
 
 
@@ -23,13 +26,20 @@ public class UserService implements IUserService {
         sessionRepo.saveUser(user);
     }
 
+    @Override
+    public void logout(String login) {
+        if (sessionRepo.getActiveSession().stream().anyMatch(s -> s.getAttribute("user").equals(login))) {
+            HttpSession httpSession = sessionRepo.getActiveSession().stream().filter(s -> s.getAttribute("user").equals(login)).findFirst().get();
+            sessionRepo.getActiveSession().remove(httpSession);
+        }
+    }
 
     private void passwordValidation(String login) throws ValidationException {
         if (!login.matches("^[A-Za-z_-]{4,32}$")) {
 
             throw new ValidationException("Неверный формат для логина");
 
-        
+
         }
     }
 
@@ -55,4 +65,6 @@ public class UserService implements IUserService {
             throw new ValidationException("Дата дня рождения не может быть в будущем.");
         }
     }
+
+
 }

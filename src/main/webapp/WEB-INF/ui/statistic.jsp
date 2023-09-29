@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ChatsTeamProject</title>
     <link rel="stylesheet" href="${pageScope.request.contextPath}/css/bootstrap.css">
+
     <style>
         .nav_menu li {
             float: left;
@@ -83,43 +84,6 @@
             margin-left: -15px;
         }
 
-        .col-md-12 {
-            font-family: Arial, Helvetica, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-            display: -ms-flexbox;
-            display: flex;
-            -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-            margin-right: 15px;
-            margin-left: 15px;
-        }
-
-        .col-md-12 td, .col-md-12 th {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-        .col-md-12 tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .col-md-12 tr:hover {
-            background-color: #ddd;
-        }
-
-        .col-md-12 th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #04AA6D;
-            color: white;
-        }
-
-        #chats {
-            width: 100%;
-        }
-
 
         html, body {
             font-family: Verdana, sans-serif;
@@ -141,18 +105,13 @@
 <div class="container">
     <div class="login">
         <div class="row">
-            <h2>Chats</h2>
+            <h2>messages</h2>
             <div class="col-md-12">
-                <table id="chats">
-                    <c:forEach var="entry" items="${chat}">
-                        <tr>
-                            <th>${entry.value.getDate}</th>
-                            <th>${entry.value.getMessageBody}</th>
-                            <th>${entry.key}</th>
-                        </tr>
-                    </c:forEach>
-                </table>
-
+                <label for="email">To</label>
+                <input type="text" class="form-control" id="email" placeholder="recipient@mail.com">
+                <br>
+                <label for="message">Message</label>
+                <input type="text" class="form-control" id="message" placeholder="message text">
             </div>
         </div>
     </div>

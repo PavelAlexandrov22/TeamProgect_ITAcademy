@@ -1,7 +1,6 @@
 package by.it.academy.jd2.messanger.domain;
 
 import java.util.Date;
-import java.util.List;
 
 public class User {
     private Long id;
@@ -11,17 +10,20 @@ public class User {
 
     private Date brDate;
 
+    private Date siginDate;
     private String role;
 
     public User() {
     }
 
-    public User(Long id, String login, String password, String fio, Date brDate, String role) {
-        this.id=id;
+
+
+    public User(String login, String password, String fio, Date brDate,Date siginDate, String role) {
         this.login = login;
         this.password = password;
         this.fio = fio;
         this.brDate = brDate;
+        this.siginDate=siginDate;
         this.role = role;
     }
 
@@ -65,24 +67,20 @@ public class User {
         this.brDate = brDate;
     }
 
+    public Date getSiginDate() {
+        return siginDate;
+    }
+
+    public void setSiginDate(Date siginDate) {
+        this.siginDate = siginDate;
+    }
+
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", fio='" + fio + '\'' +
-                ", brDate=" + brDate +
-                ", role='" + role + '\'' +
-                '}';
     }
 
     @Override
@@ -94,8 +92,6 @@ public class User {
 
         if (!login.equals(user.login)) return false;
         if (!password.equals(user.password)) return false;
-        if (!fio.equals(user.fio)) return false;
-        if (!brDate.equals(user.brDate)) return false;
         return role.equals(user.role);
     }
 
@@ -103,9 +99,19 @@ public class User {
     public int hashCode() {
         int result = login.hashCode();
         result = 31 * result + password.hashCode();
-        result = 31 * result + fio.hashCode();
-        result = 31 * result + brDate.hashCode();
         result = 31 * result + role.hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", fio='" + fio + '\'' +
+                ", brDate=" + brDate +
+                ", siginDate=" + siginDate +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

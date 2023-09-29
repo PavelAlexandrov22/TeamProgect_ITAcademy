@@ -6,21 +6,19 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-
+import java.util.Optional;
 
 public class UserSecurityFilter implements Filter {
-
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-            throws IOException, ServletException {
-
+    public void doFilter(ServletRequest request, ServletResponse response,
+                         FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         String contextPath = req.getContextPath();
         HttpSession session = req.getSession();
-        if((session != null) && (session.getAttribute("user") != null) ){
+        if((session.isNew()) && Optional.ofNullable(req.getSession().getAttribute("user")).isPresent()){
             chain.doFilter(request, response);
-        }else {
+        }else if (Optional.ofNullable(req.getSession().getAttribute("user")).isPresent()){
             resp.sendRedirect(contextPath + "/signIn");
         }
 

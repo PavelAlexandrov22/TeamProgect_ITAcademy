@@ -42,7 +42,7 @@ public class LoginAdminServlet extends HttpServlet {
         String login = req.getParameter(LOGIN_PARAM_NAME);
         String password = req.getParameter(PASSWORD_PARAM);
         String fio = req.getParameter(FIO);
-        String role = req.getParameter(ROLE);
+        String role = "admin";
         String date = req.getParameter(DATA);
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 

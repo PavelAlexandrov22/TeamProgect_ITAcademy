@@ -13,13 +13,12 @@ public class SessionRepo implements ISessionRepo {
     private final IUserRepo userRepo;
 
     public SessionRepo(IUserRepo userRepo) {
-
         this.userRepo = userRepo;
     }
 
-    private Set<User> users = Collections.synchronizedSet(new HashSet<>());
+    private final Set<User> users = Collections.synchronizedSet(new HashSet<>());
 
-    private Set<HttpSession> sessions = Collections.synchronizedSet(new HashSet<>());
+    private final Set<HttpSession> sessions = Collections.synchronizedSet(new HashSet<>());
 
     /**
      * this method give you all users set, just for looking(reading);
@@ -66,13 +65,13 @@ public class SessionRepo implements ISessionRepo {
      * return maybe nullable
      */
     @Override
-    public User getUserByName(String login, String passw) {
+    public User getUserByNameAndPassword(String login, String passw) {
         return this.users.stream().filter(user -> user.getLogin().equals(login) && user.getPassword().equals(passw)).findFirst().get();
     }
 
     /**
      *
-     * @param login
+     * @param login login of user
      * @return user
      * method for taken user entity by logn
      * can return null
@@ -92,7 +91,7 @@ public class SessionRepo implements ISessionRepo {
      */
     @Override
     public Long getUserId(String login, String passw) {
-        User user = getUserByName(login, passw);
+        User user = getUserByNameAndPassword(login, passw);
         return user == null ? null : user.getId();
     }
 
@@ -118,12 +117,15 @@ public class SessionRepo implements ISessionRepo {
 
     /**
      *
-     * @param name
+     * @param name username
      * @return user
      * return user by name(warning: maybe nullable!!!)
      */
+    @Override
     public User getUserByName(String name){
         return this.users.stream().filter(user -> user.getLogin().equals(name)).findFirst().get();
     }
+
+
 
 }

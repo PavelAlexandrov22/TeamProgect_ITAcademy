@@ -1,6 +1,5 @@
 package by.it.academy.jd2.messanger.controller.filter;
 
-
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,13 +15,11 @@ public class AdminSecurityFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
         String contextPath = req.getContextPath();
         HttpSession session = req.getSession();
-        if((session != null) && (session.getAttribute("user") != null) ){
-
-
-            chain.doFilter(request, response);
-        }else {
-            resp.sendRedirect(contextPath + "/");
-        }
+//        if((session != null) && (session.getAttribute("user") != null) ){
+//            chain.doFilter(request, response);
+//        }else {
+//            resp.sendRedirect(contextPath + "/");
+//        }
 
 
     }

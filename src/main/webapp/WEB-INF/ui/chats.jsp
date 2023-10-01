@@ -144,32 +144,13 @@
             <h2>Chats</h2>
             <div class="col-md-12">
                 <table id="chats">
-                    <%--<c:forEach items="${messages} var="mesage">
+                    <c:forEach var="entry" items="${chat}">
                         <tr>
-                        <th>${message.getDate}</th>
-                        <th>${message.getMessageBody}</th>
-                        <th>${DONT UNDERSTAND HOW...}</th>
-                    </tr>
-                    --%>
-                    <tr>
-                        <th>Date</th>
-                        <th>Message</th>
-                        <th>From</th>
-                    </tr>
-
-                    <tr>
-                        <td>29.03.2023</td>
-                        <td>Hello world!!!</td>
-                        <td>my@email.com</td>
-                    </tr>
-                    <tr>
-                        <td>29.03.2023</td>
-                        <td>Hello world!!!Hello world!!!Hello world!!!Hello world!!!Hello world!!!Hello world!!!Hello
-                            world!!!Hello world!!!Hello world!!!Hello world!!!Hello world!!!Hello world!!!
-                        </td>
-                        <td>my@email.com</td>
-                    </tr>
-
+                            <th>${entry.value.getDate}</th>
+                            <th>${entry.value.getMessageBody}</th>
+                            <th>${entry.key}</th>
+                        </tr>
+                    </c:forEach>
                 </table>
 
             </div>

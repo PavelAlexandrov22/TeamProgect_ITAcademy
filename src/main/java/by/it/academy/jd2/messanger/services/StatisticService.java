@@ -1,18 +1,17 @@
 package by.it.academy.jd2.messanger.services;
 
-import by.it.academy.jd2.messanger.domain.Message;
-import by.it.academy.jd2.messanger.domain.User;
+import by.it.academy.jd2.messanger.repository.api.IMessageRepo;
 import by.it.academy.jd2.messanger.repository.api.ISessionRepo;
 import by.it.academy.jd2.messanger.services.api.IStatisticService;
 import jakarta.servlet.http.HttpSession;
 
-import java.util.Map;
-
 public class StatisticService implements IStatisticService {
     private ISessionRepo sessionRepo;
+    private IMessageRepo messageRepo;
 
-    public StatisticService(ISessionRepo sessionRepo) {
+    public StatisticService(ISessionRepo sessionRepo, IMessageRepo messageRepo) {
         this.sessionRepo = sessionRepo;
+        this.messageRepo = messageRepo;
     }
 
     @Override
@@ -22,11 +21,11 @@ public class StatisticService implements IStatisticService {
 
     @Override
     public void updateStatistic(HttpSession session) {
-
-      //todo  мне нужно положишь статистику в бд? Сергей? типо принять сессию и положить в сет статистик
+        sessionRepo.getActiveSession().add(session);
     }
 
-
+    public long getMessageStatistic() {
+        return messageRepo.countAllMessages();
+    }
 
 }
-

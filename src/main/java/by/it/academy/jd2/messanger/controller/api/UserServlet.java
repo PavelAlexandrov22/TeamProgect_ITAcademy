@@ -17,20 +17,22 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-@WebServlet(name = "userServlet", urlPatterns = "api/user")
+@WebServlet(name = "userServlet", urlPatterns = "/api/user")
 public class UserServlet extends HttpServlet {
-
-
 
     private static final String LOGIN_PARAM_NAME = "login";
     private static final String PASSWORD_PARAM = "password";
     private static final String FIO = "fio";
-    private static final String ROLE = "User";
-
     private static final String DATA = "data";
     private static final IUserService userService = UserServiceFactory.getInstance();
 
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        req.getRequestDispatcher("/ui/signup.jsp").forward(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -41,39 +43,32 @@ public class UserServlet extends HttpServlet {
         String login = req.getParameter(LOGIN_PARAM_NAME);
         String password = req.getParameter(PASSWORD_PARAM);
         String fio = req.getParameter(FIO);
-        String role = req.getParameter(ROLE);
         String date = req.getParameter(DATA);
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-
-
-
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 
         User user = new User();
         user.setLogin(login);
         user.setPassword(password);
         user.setFio(fio);
-        user.setRole(role);
+        user.setRole("user");
+        user.setSiginDate(new Date());
+
         try {
             user.setBrDate(df.parse(date));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-
-        try {
-          userService.save(user);
+            userService.save(user);
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
-            req.getRequestDispatcher( "/user/message");
-
-        } catch (ValidationException e) {
+            if(login.equals("admin")){
+                req.getRequestDispatcher("/admin/statistic").forward(req, resp);
+            }else {
+                req.getRequestDispatcher( "/user/message").forward(req, resp);
+            }
+        } catch (ValidationException|ParseException e) {
             resp.setStatus(400);
             resp.getWriter().write(e.getMessage());
         }catch (IllegalArgumentException e){
             resp.setStatus(500);
             resp.getWriter().write(e.getMessage());
         }
-
-
     }
 }

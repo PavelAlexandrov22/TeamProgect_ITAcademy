@@ -5,4 +5,6 @@ import by.it.academy.jd2.messanger.core.exeptions.ValidationException;
 
 public interface IUserService {
     void save(User user) throws ValidationException;
+
+    void logout(String login);
 }

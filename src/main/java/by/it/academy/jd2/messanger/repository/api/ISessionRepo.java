@@ -12,7 +12,8 @@ public interface ISessionRepo {
 
     Long getCountUser();
 
-    User getUserByName(String login, String passw);
+    User getUserByNameAndPassword(String login, String passw);
+    User getUserByName(String login);
 
     User getUserByLogin(String  login);
 

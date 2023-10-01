@@ -22,7 +22,7 @@ public class LoginAdminServlet extends HttpServlet {
     private static final String LOGIN_PARAM_NAME = "login";
     private static final String PASSWORD_PARAM = "password";
     private static final String FIO = "fio";
-    private static final String ROLE = "Admin";
+    private static final String ROLE = "admin";
 
     private static final String DATA = "data";
     private static final IUserService userService = UserServiceFactory.getInstance();
@@ -65,7 +65,12 @@ public class LoginAdminServlet extends HttpServlet {
             userService.save(user);
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
-            req.getRequestDispatcher("/admin/statistic");
+            if(role.equals("admin")){
+                req.getRequestDispatcher("/admin/statistic").forward(req, resp);
+            }else {
+                req.getRequestDispatcher("/user/").forward(req, resp);
+            }
+
 
         } catch (ValidationException e) {
             resp.setStatus(400);

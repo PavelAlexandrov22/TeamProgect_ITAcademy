@@ -11,7 +11,7 @@ public class MessageRepo implements IMessageRepo {
     private List<Message> messages=Collections.synchronizedList(new ArrayList<>());
 
     /**
-     * @param idUser
+     * @param idUser userId
      * @return list
      * method returning messages list of user
      * if list is no present, method returning you empty list
@@ -33,7 +33,7 @@ public class MessageRepo implements IMessageRepo {
     }
 
     /**
-     * @param idUser
+     * @param idUser userId
      * @return
      * give you count of messages
      */
@@ -46,5 +46,4 @@ public class MessageRepo implements IMessageRepo {
     public Long countAllMessages(){
         return (long) messages.size();
     }
-
-
+}

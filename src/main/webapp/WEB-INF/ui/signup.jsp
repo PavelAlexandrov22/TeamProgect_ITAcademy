@@ -107,7 +107,7 @@
                 <input type="password" class="form-control" id="password" placeholder="Password">
                 <br>
                 <label for="fio">FIO</label>
-                <input type="text" class="form-control" id="fio" placeholder="Firsname Lastname Surname">
+                <input type="text" class="form-control" id="fio" placeholder="Firstname Lastname Surname">
                 <br>
                 <label for="brDate">Your Birthday</label>
                 <input type="date" class="form-control" id="brDate" placeholder="11.11.1901">

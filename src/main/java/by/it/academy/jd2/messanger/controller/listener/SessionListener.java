@@ -15,7 +15,9 @@ public class SessionListener implements HttpSessionAttributeListener {
 
     @Override
     public void attributeAdded(HttpSessionBindingEvent event) {
-        HttpSessionAttributeListener.super.attributeAdded(event);
+        if("user".equalsIgnoreCase(event.getName()) && event.getValue() != null){
+            this.statisticService.getStatistics();
+        }
     }
 
     @Override

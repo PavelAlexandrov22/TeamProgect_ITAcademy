@@ -27,7 +27,7 @@ public class AdminSecurityFilter implements Filter {
                 chain.doFilter(request, response);
             }
         }else{
-            resp.sendRedirect(contextPath + "/admin/statistic");
+            resp.sendRedirect(contextPath + "/api/user");
         }
 
 

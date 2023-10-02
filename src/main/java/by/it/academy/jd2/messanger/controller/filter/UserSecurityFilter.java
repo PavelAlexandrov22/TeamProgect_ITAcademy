@@ -22,7 +22,7 @@ public class UserSecurityFilter implements Filter {
         if((session != null) && (session.getAttribute("user") != null) ){
             chain.doFilter(request, response);
         }else {
-            resp.sendRedirect(contextPath + "/api/user");
+            resp.sendRedirect(contextPath + "/api/chats");
         }
 
     }

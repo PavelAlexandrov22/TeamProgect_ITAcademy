@@ -6,6 +6,7 @@
 
     <groupId>by.it.academy.jd2</groupId>
     <artifactId>TeamProject_ITAcademy</artifactId>
+    <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <properties>

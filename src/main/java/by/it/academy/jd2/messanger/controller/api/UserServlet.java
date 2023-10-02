@@ -4,6 +4,7 @@ import by.it.academy.jd2.messanger.domain.User;
 import by.it.academy.jd2.messanger.services.api.IUserService;
 import by.it.academy.jd2.messanger.services.factory.UserServiceFactory;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.UnavailableException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 
@@ -38,7 +40,7 @@ public class UserServlet extends HttpServlet {
         String password = req.getParameter(PASSWORD_PARAM);
         String fio = req.getParameter(FIO);
         String date = req.getParameter(DATA);
-        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
         User user = new User();
         user.setLogin(login);
@@ -47,12 +49,22 @@ public class UserServlet extends HttpServlet {
         user.setRole("user");
         user.setSiginDate(new Date());
 
+//        req.getParameterMap().entrySet().forEach(p-> {
+//            try {
+//                resp.getWriter().write(p.getKey()+":"+ Arrays.stream(p.getValue()).findFirst().get());
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//        });
+//
+//        resp.getWriter().write("<br>"+login+":"+password +":"+fio);
+
         try {
             user.setBrDate(df.parse(date));
             userService.save(user);
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
-            req.getRequestDispatcher( "/user/chats");
+            req.getRequestDispatcher( "/ui/chats.jsp").forward(req,resp);
         } catch (ValidationException|ParseException e) {
             resp.setStatus(400);
             resp.getWriter().write(e.getMessage());

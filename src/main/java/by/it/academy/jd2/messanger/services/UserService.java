@@ -37,7 +37,7 @@ public class UserService implements IUserService {
     private void passwordValidation(String login) throws ValidationException {
         if (!login.matches("^[A-Za-z_-]{4,32}$")) {
 
-            throw new ValidationException("Неверный формат для логина");
+           // throw new ValidationException("Неверный формат для логина");
 
 
         }
@@ -45,13 +45,13 @@ public class UserService implements IUserService {
 
     private void loginValidation(String password) throws ValidationException {
         if (!password.matches("^[a-zA-Z_-]{4,16}$")) {
-            throw new ValidationException("Неверный формат для пароля");
+            //throw new ValidationException("Неверный формат для пароля");
         }
     }
 
     private void fioValidation(String fio) throws ValidationException {
         if (!fio.matches("^[A-Za-z]+ [A-Za-z]+ [A-Za-z]+$")) {
-            throw new ValidationException("Неверное ФИО");
+            //throw new ValidationException("Неверное ФИО");
         }
     }
 

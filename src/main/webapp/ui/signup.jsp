@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ChatsTeamProject</title>
-    <link rel="stylesheet" href="${pageScope.request.contextPath}/css/bootstrap.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/ui/css/bootstrap.css">
 
     <style>
         .nav_menu li {
@@ -96,22 +96,25 @@
 
 <div class="container">
     <div class="login">
-        <form action="${pageScope.request.contextPath}/login" method="post">
+        <form action="${pageContext.request.contextPath}/api/user" method="post">
         <div class="row">
             <h2>SignIn</h2>
             <div class="col-md-12">
-                <label for="login">Login</label>
-                <input type="text" class="form-control" id="login" placeholder="Login@mail.com">
-                <br>
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password">
-                <br>
-                <label for="fio">FIO</label>
-                <input type="text" class="form-control" id="fio" placeholder="Firsname Lastname Surname">
-                <br>
-                <label for="brDate">Your Birthday</label>
-                <input type="date" class="form-control" id="brDate" placeholder="11.11.1901">
-                <br>
+
+                    <label for="login">Login</label>
+                    <input name="login" type="text" class="form-control" id="login" placeholder="Login@mail.com">
+                    <br>
+                    <label for="password">Password</label>
+                    <input name="password" type="password" class="form-control" id="password" placeholder="Password">
+                    <br>
+                    <label for="fio">FIO</label>
+                    <input name="fio" type="text" class="form-control" id="fio"
+                           placeholder="Firstname Lastname Surname">
+                    <br>
+                    <label for="date">Your Birthday</label>
+                    <input name="data" type="date" class="form-control" id="date" placeholder="11.11.1901">
+                    <br>
+
 
             </div>
         </div>
@@ -125,8 +128,6 @@
 </div>
 </div>
 </div>
-
-
 
 
 </body>

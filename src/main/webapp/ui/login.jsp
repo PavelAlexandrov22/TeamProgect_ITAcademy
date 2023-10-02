@@ -10,13 +10,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ChatsTeamProject</title>
-    <link rel="stylesheet" href="${pageScope.request.contextPath}/css/bootstrap.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/ui/css/bootstrap.css">
 </head>
 
 <body>
 <div class="container">
     <div class="login">
-        <form action="${pageScope.request.contextPath}/api/login" method="post">
+        <form action="${pageContext.request.contextPath}/api/login" method="post">
             <div class="row">
                 <h2>Sign Up</h2>
                 <div class="col-md-12">

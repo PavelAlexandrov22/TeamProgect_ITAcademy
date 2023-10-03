@@ -47,7 +47,6 @@ public class LoginServlet extends HttpServlet {
         try {
             iloginService.login(user);
             HttpSession session = req.getSession();
-            session.setAttribute("user", user);
             if (login.equals("admin")){
                 req.getRequestDispatcher("/admin/statistic").forward(req,resp);
             }else{

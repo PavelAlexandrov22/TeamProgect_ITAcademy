@@ -7,7 +7,7 @@ import jakarta.servlet.http.*;
 public class SessionListener implements HttpSessionAttributeListener {
 
 
-    private  final IStatisticService statisticService;
+    private final IStatisticService statisticService;
 
     public SessionListener() {
         this.statisticService = StatisticServiceFactory.getInstance();
@@ -15,18 +15,29 @@ public class SessionListener implements HttpSessionAttributeListener {
 
     @Override
     public void attributeAdded(HttpSessionBindingEvent event) {
-        if("user".equalsIgnoreCase(event.getName()) && event.getValue() != null){
-            this.statisticService.getStatistics();
+        if ("user".equalsIgnoreCase(event.getName()) && event.getValue() != null) {
+            this.statisticService.incSessionCount();
         }
     }
 
     @Override
     public void attributeRemoved(HttpSessionBindingEvent event) {
-        HttpSessionAttributeListener.super.attributeRemoved(event);
+        if ("user".equalsIgnoreCase(event.getName())) {
+            this.statisticService.decSessionCount();
+        }
     }
 
     @Override
     public void attributeReplaced(HttpSessionBindingEvent event) {
-        HttpSessionAttributeListener.super.attributeReplaced(event);
+        if ("user".equalsIgnoreCase(event.getName())) {
+            if (event.getValue() != null) {
+                this.statisticService.decSessionCount();
+                this.statisticService.incSessionCount();
+            } else {
+                this.statisticService.decSessionCount();
+            }
+
+        }
+
     }
 }

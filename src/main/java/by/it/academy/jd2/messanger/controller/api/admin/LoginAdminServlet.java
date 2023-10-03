@@ -24,7 +24,7 @@ public class LoginAdminServlet extends HttpServlet {
     private static final String FIO = "fio";
     private static final String ROLE = "admin";
 
-    private static final String DATA = "data";
+    private static final String DATE = "date";
     private static final IUserService userService = UserServiceFactory.getInstance();
 
     @Override
@@ -43,7 +43,7 @@ public class LoginAdminServlet extends HttpServlet {
         String password = req.getParameter(PASSWORD_PARAM);
         String fio = req.getParameter(FIO);
         String role = req.getParameter(ROLE);
-        String date = req.getParameter(DATA);
+        String date = req.getParameter(DATE);
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
 
@@ -68,10 +68,8 @@ public class LoginAdminServlet extends HttpServlet {
             if(role.equals("admin")){
                 req.getRequestDispatcher("/admin/statistic").forward(req, resp);
             }else {
-                req.getRequestDispatcher("/user/").forward(req, resp);
+                req.getRequestDispatcher("/api/chats").forward(req, resp);
             }
-
-
         } catch (ValidationException e) {
             resp.setStatus(400);
             resp.getWriter().write(e.getMessage());

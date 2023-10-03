@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "message", urlPatterns = "/user/message")
+@WebServlet(name = "messageServlet", urlPatterns = "/user/message")
 public class MessageServlet extends HttpServlet {
 
     private IMessageService messageService = MessageServiceFactory.getInstance();
@@ -34,7 +34,7 @@ public class MessageServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
         req.setAttribute("message", messageService.getMessage(user));
         req.setAttribute("user", user);
-        req.getRequestDispatcher("/ui/chats.jsp").forward(req, resp);
+        req.getRequestDispatcher("/ui/message.jsp").forward(req, resp);
 
 
 

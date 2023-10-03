@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebFilter(urlPatterns =  "/admin/login")
+@WebFilter(urlPatterns =  "/admin/*")
 public class AdminSecurityFilter implements Filter {
 
     @Override
@@ -27,7 +27,7 @@ public class AdminSecurityFilter implements Filter {
                 chain.doFilter(request, response);
             }
         }else{
-            resp.sendRedirect(contextPath + "/api/user");
+            resp.sendRedirect(contextPath + "/");
         }
 
 

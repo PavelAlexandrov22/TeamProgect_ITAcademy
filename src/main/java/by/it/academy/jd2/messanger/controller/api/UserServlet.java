@@ -23,7 +23,7 @@ public class UserServlet extends HttpServlet {
     private static final String LOGIN_PARAM_NAME = "login";
     private static final String PASSWORD_PARAM = "password";
     private static final String FIO = "fio";
-    private static final String DATA = "data";
+    private static final String DATE = "data";
     private static final IUserService userService = UserServiceFactory.getInstance();
 
 
@@ -43,7 +43,7 @@ public class UserServlet extends HttpServlet {
         String login = req.getParameter(LOGIN_PARAM_NAME);
         String password = req.getParameter(PASSWORD_PARAM);
         String fio = req.getParameter(FIO);
-        String date = req.getParameter(DATA);
+        String date = req.getParameter(DATE);
         DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 
         User user = new User();
@@ -61,7 +61,7 @@ public class UserServlet extends HttpServlet {
             if(login.equals("admin")){
                 req.getRequestDispatcher("/admin/statistic").forward(req, resp);
             }else {
-                req.getRequestDispatcher( "/user/message").forward(req, resp);
+                req.getRequestDispatcher( "/api/chats").forward(req, resp);
             }
         } catch (ValidationException|ParseException e) {
             resp.setStatus(400);

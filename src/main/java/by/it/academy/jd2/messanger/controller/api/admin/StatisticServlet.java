@@ -18,7 +18,6 @@ public class StatisticServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        //long countActiveUser = UserListener.getActiveUsers();
         resp.setCharacterEncoding(StandardCharsets.UTF_8.toString());
         req.setCharacterEncoding("UTF-8");
 

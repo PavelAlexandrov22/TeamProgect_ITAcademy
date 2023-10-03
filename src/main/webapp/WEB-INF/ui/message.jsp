@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ChatsTeamProject</title>
-    <link rel="stylesheet" href="${pageScope.request.contextPath}/css/bootstrap.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/ui/css/bootstrap.css">
 
     <style>
         .nav_menu li {
@@ -96,14 +96,15 @@
 <div class="nav_menu">
     <ul class="horizontal">
         <li><a href="#home">Home</a></li>
-        <li><a href="${pageScope.request.contextPath}/user/chats">Chats</a></li>
-        <li><a href="${pageScope.request.contextPath}/user/message">Message</a></li>
-        <li style="float:right"><a class="active" href="${pageScope.request.contextPath}/logout">Logout</a></li>
+        <li><a href="${pageContext.request.contextPath}/api/chats">Chats</a></li>
+        <li><a href="${pageContext.request.contextPath}/user/message">Message</a></li>
+        <li style="float:right"><a class="active" href="${pageContext.request.contextPath}/logout">Logout</a></li>
     </ul>
 </div>
 
 <div class="container">
     <div class="login">
+        <form action="${pageContext.request.contextPath}/api/user" method="post">
         <div class="row">
             <h2>statistic</h2>
             <div class="col-md-12">
@@ -119,6 +120,7 @@
                 <input type="submit" id="send" value="Send" class="btn btn-outline-success btn-form">
             </div>
         </div>
+        </form>
     </div>
 </div>
 

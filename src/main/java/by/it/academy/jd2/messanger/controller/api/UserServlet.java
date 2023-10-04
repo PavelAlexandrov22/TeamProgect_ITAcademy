@@ -25,10 +25,20 @@ public class UserServlet extends HttpServlet {
     private static final String LOGIN_PARAM_NAME = "login";
     private static final String PASSWORD_PARAM = "password";
     private static final String FIO = "fio";
-    private static final String DATA = "data";
+
+    private static final String DATE = "date";
+
+
+
     private static final IUserService userService = UserServiceFactory.getInstance();
 
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        req.getRequestDispatcher("/ui/signup.jsp").forward(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -39,8 +49,9 @@ public class UserServlet extends HttpServlet {
         String login = req.getParameter(LOGIN_PARAM_NAME);
         String password = req.getParameter(PASSWORD_PARAM);
         String fio = req.getParameter(FIO);
-        String date = req.getParameter(DATA);
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String date = req.getParameter(DATE);
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+
 
         User user = new User();
         user.setLogin(login);
@@ -49,22 +60,21 @@ public class UserServlet extends HttpServlet {
         user.setRole("user");
         user.setSiginDate(new Date());
 
-//        req.getParameterMap().entrySet().forEach(p-> {
-//            try {
-//                resp.getWriter().write(p.getKey()+":"+ Arrays.stream(p.getValue()).findFirst().get());
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//        });
-//
-//        resp.getWriter().write("<br>"+login+":"+password +":"+fio);
 
         try {
             user.setBrDate(df.parse(date));
             userService.save(user);
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
+
+            if(login.equals("admin")){
+                req.getRequestDispatcher("/admin/statistic").forward(req, resp);
+            }else {
+                req.getRequestDispatcher( "/api/chats").forward(req, resp);
+            }
+
             req.getRequestDispatcher( "/ui/chats.jsp").forward(req,resp);
+
         } catch (ValidationException|ParseException e) {
             resp.setStatus(400);
             resp.getWriter().write(e.getMessage());

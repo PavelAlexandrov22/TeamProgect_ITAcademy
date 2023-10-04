@@ -8,4 +8,11 @@ public interface IStatisticService {
 
     long getMessageStatistic();
 
+    long incSessionCount();
+    long decSessionCount();
+
 }
+
+
+
+

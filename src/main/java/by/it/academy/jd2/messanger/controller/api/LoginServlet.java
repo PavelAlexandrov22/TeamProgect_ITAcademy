@@ -23,6 +23,7 @@ public class LoginServlet extends HttpServlet {
     private static final ILoginService iloginService = LoginServiceFactory.getInstance();
     private static final IStatisticService statisticService = StatisticServiceFactory.getInstance();
 
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -46,11 +47,13 @@ public class LoginServlet extends HttpServlet {
 
         try {
             iloginService.login(user);
-            HttpSession     session = req.getSession();
+
+            HttpSession session = req.getSession();
             if (login.equals("admin")){
-            req.getRequestDispatcher("/admin/statistic").forward(req,resp);
+                req.getRequestDispatcher("/admin/statistic").forward(req,resp);
             }else{
-            req.getRequestDispatcher("/user/message").forward(req,resp);
+                req.getRequestDispatcher("/user/message").forward(req,resp);
+
             }
         } catch (ValidationException e) {
             resp.setStatus(400);

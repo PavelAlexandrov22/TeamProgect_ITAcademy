@@ -5,9 +5,21 @@ import by.it.academy.jd2.messanger.repository.api.ISessionRepo;
 import by.it.academy.jd2.messanger.services.api.IStatisticService;
 import jakarta.servlet.http.HttpSession;
 
+
+import java.util.concurrent.atomic.AtomicLong;
+
+
+
 public class StatisticService implements IStatisticService {
     private ISessionRepo sessionRepo;
     private IMessageRepo messageRepo;
+
+
+    private AtomicLong sessionCounter = new AtomicLong(0);
+
+
+
+
 
     public StatisticService(ISessionRepo sessionRepo, IMessageRepo messageRepo) {
         this.sessionRepo = sessionRepo;
@@ -28,5 +40,15 @@ public class StatisticService implements IStatisticService {
         return messageRepo.countAllMessages();
     }
 
-}
 
+    @Override
+    public long incSessionCount() {
+        return this.sessionCounter.incrementAndGet();
+    }
+
+
+    @Override
+    public long decSessionCount() {
+        return this.sessionCounter.decrementAndGet();
+    }
+}

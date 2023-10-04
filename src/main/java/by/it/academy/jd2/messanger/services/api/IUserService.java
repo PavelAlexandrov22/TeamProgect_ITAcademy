@@ -7,4 +7,6 @@ public interface IUserService {
     void save(User user) throws ValidationException;
 
     void logout(String login);
+
 }
+

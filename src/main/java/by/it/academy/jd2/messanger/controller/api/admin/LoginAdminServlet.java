@@ -22,9 +22,9 @@ public class LoginAdminServlet extends HttpServlet {
     private static final String LOGIN_PARAM_NAME = "login";
     private static final String PASSWORD_PARAM = "password";
     private static final String FIO = "fio";
-    private static final String ROLE = "Admin";
+    private static final String ROLE = "admin";
 
-    private static final String DATA = "data";
+    private static final String DATE = "date";
     private static final IUserService userService = UserServiceFactory.getInstance();
 
     @Override
@@ -42,8 +42,9 @@ public class LoginAdminServlet extends HttpServlet {
         String login = req.getParameter(LOGIN_PARAM_NAME);
         String password = req.getParameter(PASSWORD_PARAM);
         String fio = req.getParameter(FIO);
-        String role = "admin";
-        String date = req.getParameter(DATA);
+        String role = req.getParameter(ROLE);
+        String date = req.getParameter(DATE);
+
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
 
@@ -65,8 +66,11 @@ public class LoginAdminServlet extends HttpServlet {
             userService.save(user);
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
-            req.getRequestDispatcher("/admin/statistic");
-
+            if(role.equals("admin")){
+                req.getRequestDispatcher("/admin/statistic").forward(req, resp);
+            }else {
+                req.getRequestDispatcher("/api/chats").forward(req, resp);
+            }
         } catch (ValidationException e) {
             resp.setStatus(400);
             resp.getWriter().write(e.getMessage());

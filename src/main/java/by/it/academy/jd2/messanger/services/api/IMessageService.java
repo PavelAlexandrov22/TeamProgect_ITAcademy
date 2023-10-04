@@ -17,4 +17,6 @@ public interface IMessageService {
     Map<String,Message> getChat(String login) throws ValidationException;
 
 
+
+
 }

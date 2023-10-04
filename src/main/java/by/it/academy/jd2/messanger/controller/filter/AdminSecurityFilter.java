@@ -1,6 +1,4 @@
 package by.it.academy.jd2.messanger.controller.filter;
-
-
 import by.it.academy.jd2.messanger.domain.User;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
@@ -20,6 +18,7 @@ public class AdminSecurityFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
         String contextPath = req.getContextPath();
         HttpSession session = req.getSession();
+
         if((session != null) && (session.getAttribute("user") != null) ){
             User user = (User) session.getAttribute("user");
             user.setRole("admin");
@@ -29,6 +28,7 @@ public class AdminSecurityFilter implements Filter {
         }else{
             resp.sendRedirect(contextPath + "/");
         }
+
 
 
     }

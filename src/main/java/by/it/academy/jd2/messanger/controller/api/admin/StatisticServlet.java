@@ -18,8 +18,10 @@ public class StatisticServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+
         resp.setCharacterEncoding(StandardCharsets.UTF_8.toString());
         req.setCharacterEncoding("UTF-8");
+
 
         if (Optional.ofNullable(req.getParameter("user")).isPresent()) {
             String login = req.getParameter("user");
@@ -37,4 +39,6 @@ public class StatisticServlet extends HttpServlet {
     }
 
 
+
 }
+

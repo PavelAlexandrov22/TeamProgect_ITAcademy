@@ -9,28 +9,30 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+
 import java.util.Optional;
 
 @WebServlet(name = "logoutUser", urlPatterns = "/logout")
 public class LogoutServlet extends HttpServlet {
 
-    IUserService userService= UserServiceFactory.getInstance();
+    IUserService userService = UserServiceFactory.getInstance();
 
     @Override
+
+
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
         req.setCharacterEncoding("UTF-8");
-
-
         String login = req.getSession().getAttribute("name").toString();
+            if (Optional.ofNullable(login).isPresent()) {
+                userService.logout(login);
+                req.removeAttribute("user");
+            }
 
-        if (Optional.ofNullable(login).isPresent()){
-            userService.logout(login);
-            req.removeAttribute("user");
+            req.getRequestDispatcher("/login").forward(req, resp);
         }
 
-        req.getRequestDispatcher("/login").forward(req,resp);
     }
-}
+
+
+

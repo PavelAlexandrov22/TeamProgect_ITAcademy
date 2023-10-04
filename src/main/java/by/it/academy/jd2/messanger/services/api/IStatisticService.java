@@ -7,7 +7,12 @@ public interface IStatisticService {
     void updateStatistic(HttpSession session);
 
     long getMessageStatistic();
+
     long incSessionCount();
     long decSessionCount();
 
 }
+
+
+
+

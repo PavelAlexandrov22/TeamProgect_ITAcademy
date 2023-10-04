@@ -4,6 +4,7 @@ import by.it.academy.jd2.messanger.domain.User;
 import by.it.academy.jd2.messanger.services.api.IUserService;
 import by.it.academy.jd2.messanger.services.factory.UserServiceFactory;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.UnavailableException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 
@@ -23,7 +25,11 @@ public class UserServlet extends HttpServlet {
     private static final String LOGIN_PARAM_NAME = "login";
     private static final String PASSWORD_PARAM = "password";
     private static final String FIO = "fio";
-    private static final String DATE = "data";
+
+    private static final String DATE = "date";
+
+
+
     private static final IUserService userService = UserServiceFactory.getInstance();
 
 
@@ -46,6 +52,7 @@ public class UserServlet extends HttpServlet {
         String date = req.getParameter(DATE);
         DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 
+
         User user = new User();
         user.setLogin(login);
         user.setPassword(password);
@@ -53,16 +60,21 @@ public class UserServlet extends HttpServlet {
         user.setRole("user");
         user.setSiginDate(new Date());
 
+
         try {
             user.setBrDate(df.parse(date));
             userService.save(user);
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
+
             if(login.equals("admin")){
                 req.getRequestDispatcher("/admin/statistic").forward(req, resp);
             }else {
                 req.getRequestDispatcher( "/api/chats").forward(req, resp);
             }
+
+            req.getRequestDispatcher( "/ui/chats.jsp").forward(req,resp);
+
         } catch (ValidationException|ParseException e) {
             resp.setStatus(400);
             resp.getWriter().write(e.getMessage());

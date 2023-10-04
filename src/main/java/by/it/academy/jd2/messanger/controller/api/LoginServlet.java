@@ -21,6 +21,7 @@ public class LoginServlet extends HttpServlet {
     private static final String LOGIN = "login";
     private static final String PASSWORD = "password";
     private static final ILoginService iloginService = LoginServiceFactory.getInstance();
+    private static final IStatisticService statisticService = StatisticServiceFactory.getInstance();
 
 
     @Override
@@ -46,11 +47,13 @@ public class LoginServlet extends HttpServlet {
 
         try {
             iloginService.login(user);
+
             HttpSession session = req.getSession();
             if (login.equals("admin")){
                 req.getRequestDispatcher("/admin/statistic").forward(req,resp);
             }else{
                 req.getRequestDispatcher("/user/message").forward(req,resp);
+
             }
         } catch (ValidationException e) {
             resp.setStatus(400);

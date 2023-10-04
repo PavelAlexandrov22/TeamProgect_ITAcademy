@@ -1,4 +1,5 @@
 package by.it.academy.jd2.messanger.controller.api;
+
 import by.it.academy.jd2.messanger.core.exeptions.ValidationException;
 import by.it.academy.jd2.messanger.domain.Message;
 import by.it.academy.jd2.messanger.services.api.IMessageService;
@@ -41,4 +42,8 @@ public class ChatsServlet extends HttpServlet {
 
 
     }
+
 }
+
+
+

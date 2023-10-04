@@ -6,8 +6,11 @@
          version="6.0">
     <display-name> Messenger App</display-name>
 
+
     <!--    <listener>-->
     <!--        <listener-class>by.it.academy.jd2.messanger.controller.listener.SessionListener</listener-class>-->
     <!--    </listener>-->
+
+    
 
 </web-app>

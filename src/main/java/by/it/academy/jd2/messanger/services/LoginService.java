@@ -31,13 +31,11 @@ public class LoginService implements ILoginService {
         return sessionRepo.getUserByNameAndPassword(login, password) != null;
     }
 
-    private boolean isAdmin(User user){
+    private void isAdmin(User user){
         if( user.getLogin().equals(ADMIN) && user.getPassword().equals(ADMIN)){
             user.setRole(ADMIN);
-            return true;
         } else {
             user.setRole(USER);
-            return false;
         }
     }
 

@@ -14,6 +14,7 @@ public class LoginService implements ILoginService {
 
     private final String USER = "user";
 
+
     public LoginService(ISessionRepo userRepo) {
         this.sessionRepo = userRepo;
     }
@@ -24,15 +25,16 @@ public class LoginService implements ILoginService {
             throw new ValidationException("Такого пользователя нет в системе");
         }
         isAdmin(user);
-
     }
 
     private boolean isUserContainsInDB(String login, String password) {
         return sessionRepo.getUserByNameAndPassword(login, password) != null;
     }
 
-    private void isAdmin(User user){
-        if( user.getLogin().equals(ADMIN) && user.getPassword().equals(ADMIN)){
+    private void isAdmin(User user) {
+        User checkUser = sessionRepo.getUserByNameAndPassword(user.getLogin(), user.getPassword());
+
+        if (checkUser.getRole().equals(ADMIN)) {
             user.setRole(ADMIN);
         } else {
             user.setRole(USER);

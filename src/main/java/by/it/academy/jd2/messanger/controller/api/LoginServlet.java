@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet {
             iloginService.login(user);
 
             HttpSession session = req.getSession();
-            if (login.equals("admin")){
+            if (user.getRole().equals("admin")){
                 req.getRequestDispatcher("/admin/statistic").forward(req,resp);
             }else{
                 req.getRequestDispatcher("/user/message").forward(req,resp);

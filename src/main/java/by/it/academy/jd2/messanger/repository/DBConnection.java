@@ -1,44 +1,51 @@
 package by.it.academy.jd2.messanger.repository;
 
-import java.io.FileInputStream;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Properties;
 
 public class DBConnection {
 
-    private static final Properties properties = new Properties();
-    private static Connection connection = null;
 
-    static {
-        try (FileInputStream input = new FileInputStream("db.properties")) {
-            properties.load(input);
-            Class.forName("org.postgresql.Driver");
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 
-    public static Connection getConnection() throws SQLException {
-        String url = properties.getProperty("db.url");
-        String username = properties.getProperty("db.user");
-        String password = properties.getProperty("db.password");
-        connection = DriverManager.getConnection(url, username, password);
-        return connection;
-    }
+        private static volatile DBConnection instance;
 
-    public static void closeConnection() {
-        if (connection != null) {
-            try {
-                connection.close();
-                System.out.println("Соединение с базой данных закрыто.");
-            } catch (SQLException e) {
+        private ComboPooledDataSource cpds;
+
+        private static final Properties properties = new Properties();
+
+        private DBConnection() throws PropertyVetoException {
+
+            try (InputStream input = DBConnection.class.getResourceAsStream("/db.properties")) {
+                properties.load(input);
+            } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            cpds = new ComboPooledDataSource();
+            cpds.setDriverClass(properties.getProperty("db.driver"));
+            cpds.setJdbcUrl(properties.getProperty("db.url"));
+            cpds.setUser(properties.getProperty("db.user"));
+            cpds.setPassword(properties.getProperty("db.password"));
+            cpds.setMinPoolSize(Integer.parseInt(properties.getProperty("db.minPoolSize")));
+            cpds.setAcquireIncrement(Integer.parseInt(properties.getProperty("db.acquireIncrement")));
+            cpds.setMaxPoolSize(Integer.parseInt(properties.getProperty("db.maxPoolSize")));
+            cpds.setMaxStatements(Integer.parseInt(properties.getProperty("db.maxStatements")));
         }
-    }
+
+        public static DataSource getInstance() throws IOException, SQLException, PropertyVetoException {
+            if (instance == null) {
+                synchronized (DBConnection.class) {
+                    instance = new DBConnection();
+                }
+            }
+            return instance.cpds;
+        }
 
 
 }

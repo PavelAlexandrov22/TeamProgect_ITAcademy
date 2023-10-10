@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -27,6 +28,7 @@ public class UserServlet extends HttpServlet {
     private static final String FIO = "fio";
 
     private static final String DATE = "date";
+
 
 
 
@@ -53,6 +55,7 @@ public class UserServlet extends HttpServlet {
         DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 
 
+
         User user = new User();
         user.setLogin(login);
         user.setPassword(password);
@@ -61,7 +64,9 @@ public class UserServlet extends HttpServlet {
         user.setSiginDate(new Date());
 
 
+
         try {
+
             user.setBrDate(df.parse(date));
             userService.save(user);
             HttpSession session = req.getSession();

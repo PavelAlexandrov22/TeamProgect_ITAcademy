@@ -112,7 +112,7 @@
                            placeholder="Firstname Lastname Surname">
                     <br>
                     <label for="date">Your Birthday</label>
-                    <input name="data" type="date" class="form-control" id="date" placeholder="11.11.1901">
+                    <input name="date" type="date" class="form-control" id="date" placeholder="11.11.1901">
                     <br>
 
 

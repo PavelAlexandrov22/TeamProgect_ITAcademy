@@ -13,8 +13,8 @@ public class SessionRepoFactory {
 
         if (instance == null) {
             synchronized (SessionRepoFactory.class) {
-                if (instance==null){
-                    instance=new SessionRepo(UserRepoFactory.getInstance());
+                if (instance == null) {
+                    instance = new SessionRepo(UserRepoFactory.getInstance());
                 }
             }
         }

@@ -67,7 +67,7 @@ public class UserServlet extends HttpServlet {
 
         try {
 
-            user.setBrDate(df.parse(date));
+           // user.setBrDate(df.parse(date));
             userService.save(user);
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
@@ -80,7 +80,7 @@ public class UserServlet extends HttpServlet {
 
             req.getRequestDispatcher( "/ui/chats.jsp").forward(req,resp);
 
-        } catch (ValidationException|ParseException e) {
+        } catch (ValidationException e) {
             resp.setStatus(400);
             resp.getWriter().write(e.getMessage());
         }catch (IllegalArgumentException e){

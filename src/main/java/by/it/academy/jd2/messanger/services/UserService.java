@@ -22,7 +22,7 @@ public class UserService implements IUserService {
         loginValidation(user.getLogin());
         passwordValidation(user.getPassword());
         fioValidation(user.getFio());
-        brDayValidation(user.getBrDate());
+     //   brDayValidation(user.getBrDate());
         sessionRepo.saveUser(user);
     }
 
@@ -59,16 +59,16 @@ public class UserService implements IUserService {
         }
     }
 
-    private void brDayValidation(Date brDay) throws ValidationException {
-        Date currentDate = new Date();
-
-        if (brDay == null) {
-            throw new ValidationException("Не указана дата дня рождения");
-        }
-        if (brDay.after(currentDate)) {
-            throw new ValidationException("Дата дня рождения не может быть в будущем времени");
-        }
-    }
+//    private void brDayValidation(Date brDay) throws ValidationException {
+//        Date currentDate = new Date();
+//
+//        if (brDay == null) {
+//            throw new ValidationException("Не указана дата дня рождения");
+//        }
+//        if (brDay.after(currentDate)) {
+//            throw new ValidationException("Дата дня рождения не может быть в будущем времени");
+//        }
+//    }
 
 
 }

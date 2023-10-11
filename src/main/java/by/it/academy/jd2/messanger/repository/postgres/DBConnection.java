@@ -1,4 +1,4 @@
-package by.it.academy.jd2.messanger.repository;
+package by.it.academy.jd2.messanger.repository.postgres;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
@@ -6,12 +6,9 @@ import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.SQLException;
 import java.util.Properties;
 
 public class DBConnection {
-
-
 
         private static volatile DBConnection instance;
 
@@ -38,10 +35,14 @@ public class DBConnection {
             cpds.setMaxStatements(Integer.parseInt(properties.getProperty("db.maxStatements")));
         }
 
-        public static DataSource getInstance() throws IOException, SQLException, PropertyVetoException {
+        public static DataSource getInstance() {
             if (instance == null) {
                 synchronized (DBConnection.class) {
-                    instance = new DBConnection();
+                    try {
+                        instance = new DBConnection();
+                    } catch (PropertyVetoException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
             return instance.cpds;

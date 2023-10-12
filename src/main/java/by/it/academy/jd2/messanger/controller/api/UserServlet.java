@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
 import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -68,10 +67,9 @@ public class UserServlet extends HttpServlet {
 
 
         try {
-
-
             Date data = df.parse(date);
             user.setBrDate(data);
+
             userService.save(user);
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
@@ -82,7 +80,9 @@ public class UserServlet extends HttpServlet {
                 req.getRequestDispatcher( "/api/chats").forward(req, resp);
             }
 
+
         } catch (ValidationException|ParseException e) {
+
             resp.setStatus(400);
             resp.getWriter().write(e.getMessage());
         }catch (IllegalArgumentException e){

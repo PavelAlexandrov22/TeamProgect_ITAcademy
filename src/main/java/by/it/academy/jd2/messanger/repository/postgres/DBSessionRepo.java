@@ -1,20 +1,40 @@
 package by.it.academy.jd2.messanger.repository.postgres;
-
 import by.it.academy.jd2.messanger.domain.User;
 import by.it.academy.jd2.messanger.repository.DBConnection;
 import by.it.academy.jd2.messanger.repository.api.ISessionRepo;
 import jakarta.servlet.http.HttpSession;
-
 import javax.sql.DataSource;
+
+import java.beans.PropertyVetoException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 public class DBSessionRepo implements ISessionRepo {
 
-    private DataSource ds = DBConnection.getInstance();
+    private final DataSource ds = DBConnection.getInstance();
 
-    //todo add sql requests in all class
+    public DBSessionRepo() throws
+            PropertyVetoException, SQLException, IOException {
+    }
+
+    private final Set<User> users = Collections.synchronizedSet(new HashSet<>());
+
+    private final Set<HttpSession> sessions = Collections.synchronizedSet(new HashSet<>());
+
+
+
+
+
+
+
+
+    //to do add sql requests in all class
     @Override
     public Set<User> getUsersSet() {
+
         return null;
     }
 

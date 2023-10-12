@@ -1,5 +1,6 @@
 package by.it.academy.jd2.messanger.domain;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class User {

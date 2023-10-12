@@ -10,12 +10,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -52,7 +53,7 @@ public class UserServlet extends HttpServlet {
         String password = req.getParameter(PASSWORD_PARAM);
         String fio = req.getParameter(FIO);
         String date = req.getParameter(DATE);
-        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
 
 
@@ -66,8 +67,9 @@ public class UserServlet extends HttpServlet {
 
 
         try {
+            Date data = df.parse(date);
+            user.setBrDate(data);
 
-           // user.setBrDate(df.parse(date));
             userService.save(user);
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
@@ -78,9 +80,9 @@ public class UserServlet extends HttpServlet {
                 req.getRequestDispatcher( "/api/chats").forward(req, resp);
             }
 
-            req.getRequestDispatcher( "/ui/chats.jsp").forward(req,resp);
 
-        } catch (ValidationException e) {
+        } catch (ValidationException|ParseException e) {
+
             resp.setStatus(400);
             resp.getWriter().write(e.getMessage());
         }catch (IllegalArgumentException e){

@@ -1,0 +1,33 @@
+
+
+CREATE TABLE IF NOT EXISTS messager.users
+(
+    id bigint NOT NULL DEFAULT nextval('messager.users_id_seq'::regclass),
+    login character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    password character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    fio character varying(255) COLLATE pg_catalog."default",
+    birth_date date,
+    sign_in_date date,
+    role character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT users_pkey PRIMARY KEY (id)
+)
+
+
+CREATE TABLE IF NOT EXISTS messager.messages
+(
+    id bigint NOT NULL DEFAULT nextval('messager.messages_id_seq'::regclass),
+    from_id bigint NOT NULL,
+    to_id bigint NOT NULL,
+    message_body text COLLATE pg_catalog."default",
+    date date,
+    CONSTRAINT messages_pkey PRIMARY KEY (id),
+    CONSTRAINT messages_from_id_fkey FOREIGN KEY (from_id)
+        REFERENCES messager.users (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT messages_to_id_fkey FOREIGN KEY (to_id)
+        REFERENCES messager.users (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+

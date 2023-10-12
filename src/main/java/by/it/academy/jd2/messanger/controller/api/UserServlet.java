@@ -82,7 +82,6 @@ public class UserServlet extends HttpServlet {
 
 
         } catch (ValidationException|ParseException e) {
-
             resp.setStatus(400);
             resp.getWriter().write(e.getMessage());
         }catch (IllegalArgumentException e){

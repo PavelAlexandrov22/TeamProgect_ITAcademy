@@ -4,21 +4,14 @@ import by.it.academy.jd2.messanger.domain.User;
 import by.it.academy.jd2.messanger.services.api.IUserService;
 import by.it.academy.jd2.messanger.services.factory.UserServiceFactory;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.UnavailableException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
-import javax.xml.crypto.Data;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
+import java.text.SimpleDateFormat;;
 import java.util.Date;
 
 
@@ -68,10 +61,9 @@ public class UserServlet extends HttpServlet {
 
 
         try {
-
-
             Date data = df.parse(date);
             user.setBrDate(data);
+
             userService.save(user);
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
@@ -82,7 +74,9 @@ public class UserServlet extends HttpServlet {
                 req.getRequestDispatcher( "/api/chats").forward(req, resp);
             }
 
+
         } catch (ValidationException|ParseException e) {
+
             resp.setStatus(400);
             resp.getWriter().write(e.getMessage());
         }catch (IllegalArgumentException e){

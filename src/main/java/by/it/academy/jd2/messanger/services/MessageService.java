@@ -78,7 +78,7 @@ public class MessageService implements IMessageService {
      * @throws ValidationException this method need object user, because we make sort in dao by user id
      *                             and if in object message we don`t fill field toId we won`t use this massage later
      */
-    private boolean isUserInSystem(String login) throws ValidationException {
+    private  boolean isUserInSystem(String login) throws ValidationException {
         user = sessionRepo.getUserByLogin(login);
         if (user != null) {
             return true;

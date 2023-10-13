@@ -30,7 +30,7 @@ public class StatisticServlet extends HttpServlet {
                 req.setAttribute("messages",statisticService.getMessageStatistic());
                 req.getRequestDispatcher("/admin/statistic").forward(req, resp);
             } else {
-                req.getRequestDispatcher("/api/chats").forward(req, resp);
+                resp.sendRedirect(req.getContextPath() + "/api/chats");
             }
         } else {
             req.getRequestDispatcher("/login").forward(req, resp);

@@ -3,22 +3,15 @@ import by.it.academy.jd2.messanger.domain.User;
 import by.it.academy.jd2.messanger.repository.api.ISessionRepo;
 import jakarta.servlet.http.HttpSession;
 import javax.sql.DataSource;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Connection;
-import java.sql.Date;
+import java.sql.PreparedStatement;
+
 import java.util.Set;
 
 public class DBSessionRepo implements ISessionRepo {
 
     private final DataSource ds = DBConnection.getInstance();
-
-
-
-
-
-
-
 
 
     String insertQuery;

@@ -9,10 +9,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-<<<<<<< HEAD
-=======
-import javax.xml.crypto.Data;
->>>>>>> e3a6c8d94da103fa611b725fc7b70697abd345ca
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;;

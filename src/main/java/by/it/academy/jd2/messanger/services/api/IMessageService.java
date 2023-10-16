@@ -1,9 +1,7 @@
 package by.it.academy.jd2.messanger.services.api;
-
 import by.it.academy.jd2.messanger.core.exeptions.ValidationException;
 import by.it.academy.jd2.messanger.domain.Message;
 import by.it.academy.jd2.messanger.domain.User;
-
 import java.util.List;
 import java.util.Map;
 

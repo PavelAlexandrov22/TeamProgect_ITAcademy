@@ -1,9 +1,9 @@
 package by.it.academy.jd2.messanger.controller.filter;
 import by.it.academy.jd2.messanger.core.exeptions.ValidationException;
 import by.it.academy.jd2.messanger.domain.User;
-import by.it.academy.jd2.messanger.services.api.IMessageService;
+import by.it.academy.jd2.messanger.services.api.ILoginService;
 import by.it.academy.jd2.messanger.services.api.IUserService;
-import by.it.academy.jd2.messanger.services.factory.MessageServiceFactory;
+import by.it.academy.jd2.messanger.services.factory.LoginServiceFactory;
 import by.it.academy.jd2.messanger.services.factory.UserServiceFactory;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
@@ -17,7 +17,8 @@ import java.io.IOException;
 public class AdminSecurityFilter implements Filter {
 
     private final IUserService userService = UserServiceFactory.getInstance();
-    private final IMessageService messageService = MessageServiceFactory.getInstance();
+
+    private final ILoginService loginService = LoginServiceFactory.getInstance();
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
@@ -34,7 +35,9 @@ public class AdminSecurityFilter implements Filter {
                 chain.doFilter(request, response);
             }
         }else{
-            if(!messageService.isUserInSystem("admin")){
+            User user = new User();
+            user.setRole("admin");
+            if(loginService.isAdmin(user)){
                 try {
                     userService.save(new User("admin", "admin",
                             null, null, null, "admin"));
@@ -44,6 +47,8 @@ public class AdminSecurityFilter implements Filter {
                 }
 
             }
+
+
             resp.sendRedirect(contextPath + "/");
         }
 

@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 @WebServlet(name = "loginAdmin", urlPatterns = "/admin/login")
@@ -45,7 +46,7 @@ public class LoginAdminServlet extends HttpServlet {
         String role = req.getParameter(ROLE);
         String date = req.getParameter(DATE);
 
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
 
 
@@ -55,14 +56,16 @@ public class LoginAdminServlet extends HttpServlet {
         user.setPassword(password);
         user.setFio(fio);
         user.setRole(role);
-        try {
-            user.setBrDate(df.parse(date));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        user.setSiginDate(new Date());
 
 
+
+
+
         try {
+            Date data = df.parse(date);
+            user.setBrDate(data);
+
             userService.save(user);
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
@@ -71,12 +74,14 @@ public class LoginAdminServlet extends HttpServlet {
             }else {
                 req.getRequestDispatcher("/api/chats").forward(req, resp);
             }
-        } catch (ValidationException e) {
+        } catch (ValidationException e ) {
             resp.setStatus(400);
             resp.getWriter().write(e.getMessage());
         }catch (IllegalArgumentException e){
             resp.setStatus(500);
             resp.getWriter().write(e.getMessage());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
 
 

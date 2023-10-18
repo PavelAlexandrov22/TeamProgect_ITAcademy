@@ -13,12 +13,27 @@ import java.sql.PreparedStatement;
 import java.util.*;
 
 public class DBSessionRepo implements ISessionRepo {
+    private static final DataSource ds = DBConnection.getInstance();
+    private static String insertQuery;
+    private static long count;
 
-    private final DataSource ds = DBConnection.getInstance();
+    static {
+        insertQuery = new String("SELECT COUNT(*) FROM messager.users;");
 
-    private String insertQuery;
+        try (Connection con = ds.getConnection();
+             PreparedStatement pst = con.prepareStatement(insertQuery)) {
 
+            ResultSet resultSet = pst.executeQuery();
 
+            if (resultSet.next()) {
+                count = resultSet.getLong(1);
+            } else {
+                throw new RuntimeException("Не получилось получить количество пользователей из системы");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Ошибка пожключения к базе ", e);
+        }
+    }
 
     @Override
     public Set<User> getUsersSet() {
@@ -52,21 +67,7 @@ public class DBSessionRepo implements ISessionRepo {
 
     @Override
     public Long getCountUser() {
-        insertQuery = new String("SELECT COUNT(*) FROM messager.users;");
-
-        try (Connection con = ds.getConnection();
-             PreparedStatement pst = con.prepareStatement(insertQuery)) {
-
-            ResultSet resultSet = pst.executeQuery();
-
-            if (resultSet.next()) {
-                return resultSet.getLong(1);
-            } else {
-                throw new RuntimeException("Не получилось получить количество пользователей из системы");
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Ошибка пожключения к базе ", e);
-        }
+        return count;
     }
 
     @Override
@@ -233,6 +234,8 @@ public class DBSessionRepo implements ISessionRepo {
 
     @Override
     public void saveUser(User user) {
+
+        count++;
 
         insertQuery = new String("INSERT INTO messager.users (login, password, fio, birth_date, sign_in_date, role) VALUES (?, ?, ?, ?, ?, ?);");
 

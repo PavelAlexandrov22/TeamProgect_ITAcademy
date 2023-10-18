@@ -47,6 +47,4 @@ public class DBConnection {
             }
             return instance.cpds;
         }
-
-
 }

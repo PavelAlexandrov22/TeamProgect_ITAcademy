@@ -48,19 +48,12 @@ public class LoginAdminServlet extends HttpServlet {
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
-
-
-
         User user = new User();
         user.setLogin(login);
         user.setPassword(password);
         user.setFio(fio);
         user.setRole(role);
         user.setSiginDate(new Date());
-
-
-
-
 
         try {
             Date data = df.parse(date);
@@ -83,7 +76,6 @@ public class LoginAdminServlet extends HttpServlet {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-
 
     }
 }

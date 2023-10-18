@@ -28,7 +28,7 @@ public class DBSessionRepo implements ISessionRepo {
             if (resultSet.next()) {
                 count = resultSet.getLong(1);
             } else {
-                throw new RuntimeException("Не получилось получить количество пользователей из системы");
+                count = 0;
             }
         } catch (SQLException e) {
             throw new RuntimeException("Ошибка пожключения к базе ", e);

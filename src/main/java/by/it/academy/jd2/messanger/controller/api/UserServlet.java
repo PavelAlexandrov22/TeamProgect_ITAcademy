@@ -71,7 +71,7 @@ public class UserServlet extends HttpServlet {
             if(login.equals("admin")){
                 req.getRequestDispatcher("/admin/statistic").forward(req, resp);
             }else {
-                req.getRequestDispatcher( "/api/chats").forward(req, resp);
+                resp.sendRedirect(req.getContextPath() + "/api/chats");
             }
 
         } catch (ValidationException|ParseException e) {

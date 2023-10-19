@@ -65,7 +65,7 @@ public class LoginAdminServlet extends HttpServlet {
             if(role.equals("admin")){
                 req.getRequestDispatcher("/admin/statistic").forward(req, resp);
             }else {
-                req.getRequestDispatcher("/api/chats").forward(req, resp);
+                resp.sendRedirect(req.getContextPath() + "/api/chats");
             }
         } catch (ValidationException e ) {
             resp.setStatus(400);

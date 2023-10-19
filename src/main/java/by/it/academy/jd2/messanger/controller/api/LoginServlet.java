@@ -10,7 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+
 
 import java.io.IOException;
 
@@ -47,12 +47,10 @@ public class LoginServlet extends HttpServlet {
 
         try {
             iloginService.login(user);
-
-            HttpSession session = req.getSession();
             if (user.getRole().equals("admin")){
                 req.getRequestDispatcher("/admin/statistic").forward(req,resp);
             }else{
-                req.getRequestDispatcher("/user/message").forward(req,resp);
+                resp.sendRedirect(req.getContextPath() + "/user/message");
 
             }
         } catch (ValidationException e) {
